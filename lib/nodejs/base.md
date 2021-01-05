@@ -1,10 +1,12 @@
-# NodeJS
+# NodeJS基础
 
 标签（空格分隔）： 理解
 
 ---
 
-异步I/0、事件驱动、单线程
+* 异步I/0
+* 事件驱动
+* 单线程
 
 ## 模块机制
 
@@ -162,3 +164,8 @@ function factory (require, exports, module) {}
 * close callbacks阶段：执行close队列中的回调
 * 两个阶段之间执行所有微任务，nextTick队列优先级高于其他微任务队列
 * Node11后执行一个timer、immediate回调后执行所有微任务
+
+## 参考资料
+
+* 《深入浅出Node.js》
+* [Event Loop](https://blog.insiderattack.net/event-loop-and-the-big-picture-nodejs-event-loop-part-1-1cb67a182810)
