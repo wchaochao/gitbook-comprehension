@@ -40,10 +40,10 @@ JavaScript引擎线程和渲染线程互斥
 
 通过事件循环执行
 
-* 执行setTimeout、setInterval，将定时器下发到定时器线程，计数结束时将定时器回调加入到任务队列中
-* 执行http请求，将http请求下发到http线程，请求状态发生变更时将相应的回调加入任务队列中
-* 执行Promise，promise状态发生变更时将相应的回调加入到任务队列中
-* 执行MutationObserver，节点发生变更时将相应的回调加入到任务队列中
+* 执行setTimeout、setInterval，将定时器下发到定时器线程，计数结束时将定时器回调加入到宏任务中
+* 执行http请求，将http请求下发到http线程，请求状态发生变更时将相应的回调加入宏任务中
+* 执行Promise，promise状态发生变更时将相应的回调加入到微任务中
+* 执行MutationObserver，节点发生变更时将相应的回调加入微任务中
 
 ## 事件循环
 

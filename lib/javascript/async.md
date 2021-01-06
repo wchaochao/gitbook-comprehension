@@ -1,4 +1,4 @@
-# 异步处理
+# 异步编程
 
 标签（空格分隔）： 理解
 
@@ -8,9 +8,23 @@
 
 通过回调函数处理异步任务
 
-### 缺点
+### 错误处理
 
-* 回调地狱
+error-first回调
+
+```javascript
+loadScript('/my/script.js', function(error, script) {
+  if (error) {
+    // handle error
+  } else {
+    // script loaded successfully
+  }
+});
+```
+
+### 串行
+
+在回调中执行下一个异步，导致回调地狱
 
 ## Promise
 
@@ -32,24 +46,33 @@
 
 #### 实例化
 
+* 只有第一次的resolve/reject有效
+* 抛出错误相当于reject
+
 ```javascript
 const promise = new Promise((resolve, reject) => {
-  // resolve(value) or reject(reason)
+  // resolve(value) or reject(error)
 })
 ```
 
-### 链式调用
+![Promise实例化](https://javascript.info/article/promise-basics/promise-resolve-reject.svg)
+
+#### 静态创建
+
+* Promise.resolve(value)：创建fulfilled promise
+* Promise.reject(reason)：创建rejected promise
+
+#### 串行
+
+链式调用
 
 * promise.then(onFulfill, onReject)：链式处理
 * promise.catch(onReject)：捕获错误，相当于promise.then(null, onReject)
-* promise.finally(onFinally): 最终处理，相当于promise.finally(onFinally, onFinally)
+* promise.finally(onFinally): 最终处理，相当于promise.then(onFinally, onFinally)
+ * 无参数
+ * 将result、error往下传
 
-### 静态创建
-
-* Promise.resolve(value)：创建fulfilled的promise
-* Promise.reject(reason)：创建rejected的promise
-
-### 多个promise
+#### 并行
 
 * Promise.all(arr)：所有promise成功时执行onFulfill回调
 * Promise.race(arr)：有一个promise成功时执行onFulfill回调
@@ -150,31 +173,43 @@ Generator的语法糖
 
 ### async
 
-* 返回Promise
+返回Promise
+
+* 成功时resolve
+* 出错时reject
 
 ```javascript
-async function f1() {
+async function f1 () {
   return 1;
 }
 
 f1().then(alert); // 1
 
-async function f2() {
+async function f2 () {
   return Promise.resolve(1);
 }
 
 f2().then(alert); // 1
+
+async function f () {
+  let response = await fetch('http://no-such-url');
+}
+
+// f() becomes a rejected promise
+f().catch(alert); // TypeError: failed to fetch // (*)
 ```
 
 ### await
 
-* 在async函数中
-* 暂停函数执行直到promise/thenable完成
+* 只能在async函数中
+* 遇到promise/thenable时暂停函数执行直到promise/thenable完成
  * promise/thenable成功时返回result
- * promise/thenable失败时抛出TypeError
+ * promise/thenable失败时抛出错误
 
 ```javascript
-let value = await promise
+async function f () {
+ let value = await promise
+}
 ```
 
 ## 参考资料
