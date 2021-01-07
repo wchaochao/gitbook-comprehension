@@ -26,11 +26,15 @@ loadScript('/my/script.js', function(error, script) {
 
 在回调中执行下一个异步，导致回调地狱
 
+### 并行
+
+使用循环并行执行
+
 ## Promise
 
 通过Promise的链式调用处理异步任务
 
-### Promise规范
+### Promise/A+规范
 
 #### 状态
 
@@ -40,7 +44,14 @@ loadScript('/my/script.js', function(error, script) {
 #### then方法
 
 * 参数为成功回调和失败回调
-* 返回值为新Promise，状态由回调决定
+ * promise resolve时执行成功回调，参数为resolve value
+ * promise reject时执行失败回调，参数为reject error
+* 返回值为新Promise，状态由回调执行情况决定
+ * 回调不是函数时，原Promise的状态传递给新Promise
+ * 回调抛出Error时，新Promise reject该错误
+ * 回调返回一个非Promise/thenable值时，新Promise resolve该返回值
+ * 回调返回一个Promise时，该Promise的状态传递给新Promise
+ * 回调返回一个thenable时，调用then方法，参数为新Promise的resolve和reject，resolve时需要再对值进行Promise/thenable判断
 
 ### Promise API
 
@@ -67,15 +78,16 @@ const promise = new Promise((resolve, reject) => {
 链式调用
 
 * promise.then(onFulfill, onReject)：链式处理
-* promise.catch(onReject)：捕获错误，相当于promise.then(null, onReject)
-* promise.finally(onFinally): 最终处理，相当于promise.then(onFinally, onFinally)
- * 无参数
- * 将result、error往下传
+* promise.catch(onReject)：捕获错误，相当于then(null, onReject)
+* promise.finally(onFinally): 最终处理，不管promise resolve或reject都会调用onFinally，无参数
+ * 回调抛出Error时，新Promise reject该错误
+ * 回调返回一个非Promise值时，忽略该返回值，传递原Promise的状态
+ * 回调返回一个Promise时，该Promise resolve时传递原Promise状态，reject时传递该Promise状态
 
 #### 并行
 
-* Promise.all(arr)：所有promise成功时执行onFulfill回调
-* Promise.race(arr)：有一个promise成功时执行onFulfill回调
+* Promise.all(arr)：所有promise成功时执行成功回调，有一个失败时执行失败回调
+* Promise.race(arr)：有一个promise成功时执行成功回调，有一个失败时执行失败回调
 
 ### Promise库
 
@@ -211,6 +223,12 @@ async function f () {
  let value = await promise
 }
 ```
+
+## 异步任务调度器
+
+* 支持并发限制
+* 支持优先级
+* 支持重试
 
 ## 参考资料
 
