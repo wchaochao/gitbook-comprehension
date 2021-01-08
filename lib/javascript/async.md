@@ -51,7 +51,7 @@ loadScript('/my/script.js', function(error, script) {
  * 回调抛出Error时，新Promise reject该错误
  * 回调返回一个非Promise/thenable值时，新Promise resolve该返回值
  * 回调返回一个Promise时，该Promise的状态传递给新Promise
- * 回调返回一个thenable时，调用then方法，参数为新Promise的resolve和reject，resolve时需要再对值进行Promise/thenable判断
+ * 回调返回一个thenable时，调用then方法，参数为新Promise封装后的resolve和reject，resolve时需要再对值进行Promise/thenable判断
 
 ### Promise API
 
