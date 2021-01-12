@@ -8,11 +8,14 @@
 
 通过回调函数处理异步任务
 
-### 错误处理
+### 异步处理
 
-error-first回调
+* 错误处理：error-first回调
+* 串行：在回调中执行下一个异步，导致回调地狱
+* 并行：使用循环并行执行
 
 ```javascript
+// error-first回调
 loadScript('/my/script.js', function(error, script) {
   if (error) {
     // handle error
@@ -22,26 +25,29 @@ loadScript('/my/script.js', function(error, script) {
 });
 ```
 
-### 串行
-
-在回调中执行下一个异步，导致回调地狱
-
-### 并行
-
-使用循环并行执行
-
 ## Promise
 
 通过Promise的链式调用处理异步任务
 
-### Promise/A+规范
+### 实例化
 
-#### 状态
+```javascript
+const promise = new Promise((resolve, reject) => {
+  // resolve(value) or reject(error)
+})
+```
+
+* 只有第一次的resolve/reject有效
+* 抛出错误相当于reject
+
+### 状态
 
 * pending -> fulfilled
 * pending -> rejected
 
-#### then方法
+![Promise实例化](https://javascript.info/article/promise-basics/promise-resolve-reject.svg)
+
+### Promise#then
 
 * 参数为成功回调和失败回调
  * promise resolve时执行成功回调，参数为resolve value
@@ -51,43 +57,35 @@ loadScript('/my/script.js', function(error, script) {
  * 回调抛出Error时，新Promise reject该错误
  * 回调返回一个非Promise/thenable值时，新Promise resolve该返回值
  * 回调返回一个Promise时，该Promise的状态传递给新Promise
- * 回调返回一个thenable时，调用then方法，参数为新Promise封装后的resolve和reject，resolve时需要再对值进行Promise/thenable判断
+ * 回调返回一个thenable时，调用它的then方法
+  * then方法抛出Error时，新Promise reject该错误
+  * then方法resolve时，对resolve的值再进行Promise/thenable判断
+  * then方法reject时，新Promise reject该错误
 
-### Promise API
+### Promise#catch
 
-#### 实例化
+捕获错误，相当于then(null, onReject)
 
-* 只有第一次的resolve/reject有效
-* 抛出错误相当于reject
+### Promise#finally
 
-```javascript
-const promise = new Promise((resolve, reject) => {
-  // resolve(value) or reject(error)
-})
-```
+最终处理，相当于then(onFinallyWrapper, onFinallyWrapper)，onFinallyWrapper执行如下
 
-![Promise实例化](https://javascript.info/article/promise-basics/promise-resolve-reject.svg)
+* 执行onFinally，无参数
+* onFinally返回一个非Promise值时，onFinallyWrapper返回原Promise的值
+* onFinally返回一个Promise时，该Promise resolve时传递原Promise状态，reject时传递该Promise状态，onFinallyWrapper返回该Promise
 
-#### 静态创建
+### 静态创建
 
-* Promise.resolve(value)：创建fulfilled promise
-* Promise.reject(reason)：创建rejected promise
+* Promise.resolve(value)：创建一个Promise，resolve value
+* Promise.reject(error)：创建一个Promise，reject error
+* Promise.all(promiseArr)：创建一个Promise，所有的Promise成功时resolve，有一个失败时reject
+* Promise.race(promiseArr)：创建一个Promise，有一个Promise成功时resolve，有一个失败时reject
 
-#### 串行
+### 异步处理
 
-链式调用
-
-* promise.then(onFulfill, onReject)：链式处理
-* promise.catch(onReject)：捕获错误，相当于then(null, onReject)
-* promise.finally(onFinally): 最终处理，不管promise resolve或reject都会调用onFinally，无参数
- * 回调抛出Error时，新Promise reject该错误
- * 回调返回一个非Promise值时，忽略该返回值，传递原Promise的状态
- * 回调返回一个Promise时，该Promise resolve时传递原Promise状态，reject时传递该Promise状态
-
-#### 并行
-
-* Promise.all(arr)：所有promise成功时执行成功回调，有一个失败时执行失败回调
-* Promise.race(arr)：有一个promise成功时执行成功回调，有一个失败时执行失败回调
+* 错误处理：最后catch
+* 串行：链式调用
+* 并行：循环、all、race
 
 ### Promise库
 
@@ -134,7 +132,7 @@ function* generatePasswordCodes() {
 }
 ```
 
-### next方法
+### Generator#next
 
 执行至下一个yield处
 
@@ -144,7 +142,7 @@ function* generatePasswordCodes() {
  * value为下一个yield或return的值
  * done为函数是否执行完成
 
-### throw方法
+### Generator#throw
 
 在yield返回处抛出错误
 
@@ -166,12 +164,17 @@ let question = generator.next().value;
 generator.throw(new Error("The answer is not found in my database")); // (2)
 ```
 
-### 异步处理
+### 异步原理
 
 通过yield/next交换值
 
 * yield时返回Promise对象或Thunk函数
 * next时在value的回调中继续next，参数为回调值
+
+### 异步处理
+
+* 错误处理：throw、try/catch
+* 串行：连续yield/next
 
 ### Generator库
 
@@ -223,6 +226,11 @@ async function f () {
  let value = await promise
 }
 ```
+
+### 异步处理
+
+* 错误处理：try/catch
+* 串行：连续await
 
 ## 异步任务调度器
 
