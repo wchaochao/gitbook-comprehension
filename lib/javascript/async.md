@@ -33,7 +33,7 @@ loadScript('/my/script.js', function(error, script) {
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-  // resolve(value) or reject(error)
+  // 异步处理完成时resolve(value) or reject(error)
 })
 ```
 
@@ -62,9 +62,17 @@ const promise = new Promise((resolve, reject) => {
   * then方法resolve时，对resolve的值再进行Promise/thenable判断
   * then方法reject时，新Promise reject该错误
 
+```javascript
+promise.then(onFulfilled, onRejected)
+```
+
 ### Promise#catch
 
 捕获错误，相当于then(null, onReject)
+
+```javascript
+promise.catch(onRejected)
+```
 
 ### Promise#finally
 
@@ -77,6 +85,9 @@ const promise = new Promise((resolve, reject) => {
 ### 静态创建
 
 * Promise.resolve(value)：创建一个Promise，resolve value
+ * value为Promise时，直接返回
+ * value为非Promise/thenable值时，resolve value
+ * value为thenable时，尝试调用then方法，对resolve的值再进行Promise/thenable判断
 * Promise.reject(error)：创建一个Promise，reject error
 * Promise.all(promiseArr)：创建一个Promise，所有的Promise成功时resolve，有一个失败时reject
 * Promise.race(promiseArr)：创建一个Promise，有一个Promise成功时resolve，有一个失败时reject
@@ -240,5 +251,7 @@ async function f () {
 
 ## 参考资料
 
-* [JavaScript.info](https://javascript.info/)
 * [异步处理](http://codingdict.com/article/22485)
+* [Promise/A+](https://promisesaplus.com/)
+* [Promise迷你书](http://liubin.org/promises-book/)
+* [JavaScript.info](https://javascript.info/)
