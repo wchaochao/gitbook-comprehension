@@ -22,4 +22,5 @@
 * [集总电路](lib/electronic/lumped-circuit.md)
 * [线性电路分析](lib/electronic/linear-circuit-analysis.md)
 * [非线性电路分析](lib/electronic/non-linear-circuit-analysis.md)
+* [数字逻辑](lib/electronic/math-logic.md)
 * [模电数电基础](lib/electronic/base.md)
