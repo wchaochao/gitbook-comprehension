@@ -25,6 +25,19 @@ loadScript('/my/script.js', function(error, script) {
 });
 ```
 
+### 回调测试
+
+```javascript
+describe('Callback', () => {
+  it('user `done`', done => {
+    asyncTask(() => {
+      // assert
+      done()
+    })
+  })
+})
+```
+
 ## Promise
 
 通过Promise的链式调用处理异步任务
@@ -37,17 +50,35 @@ const promise = new Promise((resolve, reject) => {
 })
 ```
 
-* 只有第一次的resolve/reject有效
-* 抛出错误相当于reject
-
-### 状态
+#### 状态
 
 * pending -> fulfilled
 * pending -> rejected
 
 ![Promise实例化](https://javascript.info/article/promise-basics/promise-resolve-reject.svg)
 
-### Promise#then
+#### resolve(value)
+
+第一次有效
+
+* value为普通值，直接resolve
+* value为Promise，等Promise settled时再resolve或reject
+ * 该Promise是原Promise时reject
+* value为thenable，尝试调用then方法
+  * then方法抛出Error时，reject
+  * then方法resolve时，继续对resolve值进行判断
+  * then方法reject时，reject
+
+#### reject(error)
+
+第一次有效
+
+* 不管error为何值，直接reject
+* 抛出错误相当于reject
+
+### 实例方法
+
+#### Promise#then
 
 * 参数为成功回调和失败回调
  * promise resolve时执行成功回调，参数为resolve value
@@ -55,26 +86,24 @@ const promise = new Promise((resolve, reject) => {
 * 返回值为新Promise，状态由回调执行情况决定
  * 回调不是函数时，原Promise的状态传递给新Promise
  * 回调抛出Error时，新Promise reject该错误
- * 回调返回一个非Promise/thenable值时，新Promise resolve该返回值
- * 回调返回一个Promise时，该Promise的状态传递给新Promise
- * 回调返回一个thenable时，调用它的then方法
-  * then方法抛出Error时，新Promise reject该错误
-  * then方法resolve时，对resolve的值再进行Promise/thenable判断
-  * then方法reject时，新Promise reject该错误
+ * 回调返回值时，新Promise对该值进行resolve值判断
 
 ```javascript
 promise.then(onFulfilled, onRejected)
 ```
 
-### Promise#catch
+#### Promise#catch
 
-捕获错误，相当于then(null, onReject)
+捕获错误，相当于then(undefined, onRejected)
+
+* 可以捕获之前所有promise的错误
+* ES3中需要使用promise['catch']
 
 ```javascript
 promise.catch(onRejected)
 ```
 
-### Promise#finally
+#### Promise#finally
 
 最终处理，相当于then(onFinallyWrapper, onFinallyWrapper)，onFinallyWrapper执行如下
 
@@ -82,15 +111,52 @@ promise.catch(onRejected)
 * onFinally返回一个非Promise值时，onFinallyWrapper返回原Promise的值
 * onFinally返回一个Promise时，该Promise resolve时传递原Promise状态，reject时传递该Promise状态，onFinallyWrapper返回该Promise
 
-### 静态创建
+```javascript
+promise.finally(onFinally)
+```
 
-* Promise.resolve(value)：创建一个Promise，resolve value
- * value为Promise时，直接返回
- * value为非Promise/thenable值时，resolve value
- * value为thenable时，尝试调用then方法，对resolve的值再进行Promise/thenable判断
-* Promise.reject(error)：创建一个Promise，reject error
-* Promise.all(promiseArr)：创建一个Promise，所有的Promise成功时resolve，有一个失败时reject
-* Promise.race(promiseArr)：创建一个Promise，有一个Promise成功时resolve，有一个失败时reject
+### 静态方法
+
+#### Promise.resolve
+
+将值转换为Promise
+
+* value为Promise时，直接返回
+* value为其他值时，进行resolve值判断
+
+```javascript
+Promise.resolve(1)
+```
+
+#### Promise.reject
+
+创建rejected promise
+
+```javascript
+Promise.reject('error')
+```
+
+#### Promise.all
+
+并行
+
+* 数组中的元素通过Promise.resolve转换为Promise
+* 创建一个Promise，所有的Promise成功时resolve，有一个失败时reject
+
+```javascript
+Promise.all([1, 2, 3]).then(arr => console.log(arr))
+```
+
+#### Promise.race
+
+竞争
+
+* 数组中的元素通过Promise.resolve转换为Promise
+* 创建一个Promise，有一个Promise成功时resolve，有一个失败时reject
+
+```javascript
+Promise.race([1, 2, 3]).then(val => console.log(val))
+```
 
 ### 异步处理
 
@@ -98,10 +164,26 @@ promise.catch(onRejected)
 * 串行：链式调用
 * 并行：循环、all、race
 
+### Promise测试
+
+```javascript
+describe('Promise', () => {
+  it('return promise', () => {
+    return promise.then(() => {
+      // assert
+    })
+  })
+})
+```
+
 ### Promise库
 
-* [q.js](https://github.com/kriskowal/q/blob/master/q.js)：Promise实现
-* [Bluebird](https://github.com/petkaantonov/bluebird)：Promise实现
+* [ypromise](https://github.com/YahooArchive/ypromise/blob/master/promise.js)：YUI实现的Promise Polyfill
+* [native-promise-only](Promise Polyfill)：以作为ES6 Promises的polyfill为目的的类库
+* [es6-promise](https://github.com/stefanpenner/es6-promise)：兼容 ES6 Promises的Polyfill类库
+* [JSDeferred](https://github.com/cho45/jsdeferred/blob/master/jsdeferred.js)：deferred类库
+* [q.js](https://github.com/kriskowal/q/blob/master/q.js)：Promise扩展类库，实现了 Promises 和 Deferreds 等规范
+* [Bluebird](https://github.com/petkaantonov/bluebird)：Promise扩展类库，扩展了取消promise对象的运行，取得promise的运行进度，以及错误处理的扩展检测等非常丰富的功能
 
 ## Generator
 

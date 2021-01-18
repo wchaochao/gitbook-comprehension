@@ -112,18 +112,26 @@
 
 乘积之和，表示数字逻辑
 
-#### 转换
+#### 真值表转换
 
-真值表转换为布尔表达式
+将真值表转换为最小乘积之和的布尔表达式
 
 * 对真值表中输出为1的所有输入项，1为真，0为非，乘积起来
 * 将上述项相加
 
-#### 简化
+#### 布尔表达式简化
 
-使用布尔恒等式简化布尔表达式
+使用布尔恒等式将布尔表达式简化为最小乘积之和形式
 
 ![布尔恒等式](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/boolean-identity.png)
+
+#### 门电路简化
+
+使用与非门或或非门表示其他门
+
+![门转换1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/gate-convert-1.png)
+
+![门转换2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/gate-convert-2.png)
 
 ## 二进制
 
@@ -148,3 +156,7 @@
 
 * 输入：两个加数、低位进位
 * 输出：和、高位进位
+
+## 参考资料
+
+* 《模拟和数字电子电路基础》
