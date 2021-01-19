@@ -15,7 +15,20 @@
 
 ### 静态原则
 
-二值化规范
+输入
+
+* 输入在0到V<sub>IL</sub>之间时识别为0
+* 输入在V<sub>IH</sub>到5V之间时识别为1
+
+输出
+
+* 输出为0时，输出在0到V<sub>OL</sub>之间
+* 输出为1时，输出在V<sub>OH</sub>到5V之间
+
+噪声容限
+
+* 逻辑0的噪声容限为V<sub>IL</sub>-V<sub>OL</sub>
+* 逻辑1的噪声容限为V<sub>OH</sub>-V<sub>IH</sub>
 
 ![二值化](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/static-principle.png)
 
@@ -37,6 +50,9 @@
 ### 真值表
 
 列出所有输入、输出的可能值，表示数字逻辑
+
+* 一位输入有两种输入情况，对应四种输出情况
+* n位输入有2<sup>n</sup>种输入情况，对应2<sup>2<sup>n</sup></sup>种输出情况
 
 #### 与
 

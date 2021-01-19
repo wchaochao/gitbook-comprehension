@@ -78,7 +78,7 @@ const promise = new Promise((resolve, reject) => {
 
 ### 实例方法
 
-#### Promise#then
+#### Promise.prototype.then(onFulfilled, onRejected)
 
 * 参数为成功回调和失败回调
  * promise resolve时执行成功回调，参数为resolve value
@@ -92,7 +92,7 @@ const promise = new Promise((resolve, reject) => {
 promise.then(onFulfilled, onRejected)
 ```
 
-#### Promise#catch
+#### Promise.prototype.catch(onRejected)
 
 捕获错误，相当于then(undefined, onRejected)
 
@@ -103,7 +103,7 @@ promise.then(onFulfilled, onRejected)
 promise.catch(onRejected)
 ```
 
-#### Promise#finally
+#### Promise.prototype.finally(onFinally)
 
 最终处理，相当于then(onFinallyWrapper, onFinallyWrapper)，onFinallyWrapper执行如下
 
@@ -117,7 +117,7 @@ promise.finally(onFinally)
 
 ### 静态方法
 
-#### Promise.resolve
+#### Promise.resolve(value)
 
 将值转换为Promise
 
@@ -128,15 +128,15 @@ promise.finally(onFinally)
 Promise.resolve(1)
 ```
 
-#### Promise.reject
+#### Promise.reject(error)
 
 创建rejected promise
 
 ```javascript
-Promise.reject('error')
+Promise.reject(new Error('bar)
 ```
 
-#### Promise.all
+#### Promise.all(iterable)
 
 并行
 
@@ -147,12 +147,13 @@ Promise.reject('error')
 Promise.all([1, 2, 3]).then(arr => console.log(arr))
 ```
 
-#### Promise.race
+#### Promise.race(iterable)
 
 竞争
 
 * 数组中的元素通过Promise.resolve转换为Promise
 * 创建一个Promise，有一个Promise成功时resolve，有一个失败时reject
+* 可通过Promise.race实现超时机制
 
 ```javascript
 Promise.race([1, 2, 3]).then(val => console.log(val))
