@@ -49,7 +49,7 @@
 
 ### 真值表
 
-列出所有输入、输出的可能值，表示数字逻辑
+列出所有输入、输出的可能值
 
 * 一位输入有两种输入情况，对应四种输出情况
 * n位输入有2<sup>n</sup>种输入情况，对应2<sup>2<sup>n</sup></sup>种输出情况
@@ -118,15 +118,9 @@
 | 1 | 0 | 0 |
 | 1 | 1 | 0 |
 
-### 逻辑门电路
-
-符号静态规则、输出仅为输入的函数的电路，表示数字逻辑
-
-![门电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/gate.png)
-
 ### 布尔表达式
 
-乘积之和，表示数字逻辑
+输出为1时的所有输入情况，表示为最小乘积之和
 
 #### 真值表转换
 
@@ -141,7 +135,13 @@
 
 ![布尔恒等式](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/boolean-identity.png)
 
-#### 门电路简化
+### 逻辑门电路
+
+符号静态规则、输出仅为输入的函数的电路
+
+![门电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-computer-composition/gate.png)
+
+#### 逻辑门简化
 
 使用与非门或或非门表示其他门
 

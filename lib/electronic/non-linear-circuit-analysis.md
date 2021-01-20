@@ -6,35 +6,44 @@
 
 ## 非线性元件
 
-* 二极管元件：I<sub>D</sub>=I<sub>s</sub>(e<sup>V<sub>D</sub>/V<sub>TH</sub></sup>-1)
-* 平均律元件：I<sub>D</sub>=KV<sub>D</sub><sup>2</sup>，V<sub>D</sub>>=0
+### 二极管元件
 
-## 直接分析
+电流是电压的指数函数，I<sub>D</sub>=I<sub>s</sub>(e<sup>V<sub>D</sub>/V<sub>TH</sub></sup>-1)
 
-使用节点分析进行计算
+![二极管符号](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/diode.png)
 
-### 直接分析实例
+![二极管特性曲线](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/diode-characteristic.png)
 
-* DC、电阻、平均律元件串联：对平均律元件进行节点分析
-* 线性网络、平均律元件串联：对平均律元件的接线端进行等效分析
+### 平方律元件
 
-## 图像分析
+电流是电压的平方函数，I<sub>DS</sub>=K(V<sub>DS</sub>-V<sub>T</sub>)<sup>2</sup>/2，V<sub>DS</sub>>=V<sub>T</sub>
 
-将节点分析的方程组转化为坐标轴上曲线的交点
+![平方律元件](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/square-characteristic.png)
 
-### 图像分析实例
+## 节点分析
+
+### 解方程
+
+* DC、电阻、平方律元件串联：对平方律元件进行节点分析
+* 线性网络、平方律元件串联：对平方律元件的接线端进行等效分析
+
+### 曲线交点
+
+将解方程转化为坐标轴上曲线的交点
 
 * DC、电阻、二极管元件串联：进行节点分析，解方程组转化为二极管元件v-i特性曲线与直线的交点
 * 半波滤波器：AC、电阻、二极管元件串联，输出电压只有AC的半波
 
 ## 分段线性分析
 
-将非线性元件的v-i曲线分解为一系列线段
+将非线性元件的v-i曲线分解为一系列线段进行分析
 
 ### 理想二级管
 
 * 二极管开通：短路，v<sub>D</sub>=0，i<sub>D</sub>为正
 * 二极管断开：断路，i<sub>D</sub>=0，v<sub>D</sub>为负
+
+![理想二极管](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/ideal-diode.png)
 
 ## 增量分析
 
@@ -42,6 +51,8 @@
 
 * 设小信号电源为0，得到DC子电路，根据非线性分析求I<sub>D</sub>、V<sub>D</sub>
 * 设DC电源为0，非线性元件使用增量电阻r<sub>d</sub>替代，得到小信号子电路，根据线性分析求i<sub>d</sub>、v<sub>d</sub>
+
+![增量分析](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/incremental-analysis.png)
 
 ### 增量分析实例
 

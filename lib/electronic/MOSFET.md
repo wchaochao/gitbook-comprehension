@@ -93,7 +93,7 @@
 
 ## SR模型
 
-源极S与漏极D之间有导通电阻R<sub>ON</sub>=R<sub>N</sub>L/W
+v<sub>DS</sub><=v<sub>G</sub>-v<sub>T</sub>时，源极S与漏极D之间有导通电阻R<sub>ON</sub>=R<sub>N</sub>L/W
 
 * W/L增大时，导通电阻减小
 
