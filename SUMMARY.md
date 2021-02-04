@@ -24,4 +24,5 @@
 * [非线性电路分析](lib/electronic/non-linear-circuit-analysis.md)
 * [数字逻辑](lib/electronic/math-logic.md)
 * [控制元件](lib/electronic/control.md)
+* [放大器](lib/electronic/amplifier.md)
 * [模电数电基础](lib/electronic/base.md)
