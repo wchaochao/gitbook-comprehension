@@ -47,7 +47,7 @@ I<sub>DS</sub>=K(V<sub>DS</sub>-V<sub>T</sub>)<sup>2</sup>/2，V<sub>DS</sub>>=V
 
 ## 增量分析
 
-x<sub>B</sub>=f(x<sub>A</sub>)，则x<sub>B</sub>在工作点X<sub>A</sub>的增量变化为x<sub>b</sub>=df(x<sub>A</sub>)/dx<sub>A</sub>|<sub>x<sub>A</sub>=X<sub>A</sub></sub>x<sub>a</sub>
+电路在一个工作点上对一个小扰动的响应是线性的，x<sub>B</sub>=f(x<sub>A</sub>)，则x<sub>B</sub>在工作点X<sub>A</sub>的增量变化为x<sub>b</sub>=df(x<sub>A</sub>)/dx<sub>A</sub>|<sub>x<sub>A</sub>=X<sub>A</sub></sub>x<sub>a</sub>
 
 * 设小信号电源为0，得到DC子电路，根据非线性分析求工作点电流、电压
 * 设DC电源为0，根据工作点电流、电压使用小信号模型替代元件，得到小信号子电路，根据线性分析求增量电流、增量电压

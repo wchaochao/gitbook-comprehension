@@ -192,6 +192,12 @@ v-i特性
 
 ![BJT组成](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-composition.png)
 
+### BJT模型
+
+使用两个二极管和流控电流源建模
+
+![BJT模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-model.png)
+
 ### BJT特性
 
 * i<sub>B</sub>=0时，C端与E端断开，处于截止区域
@@ -200,12 +206,6 @@ v-i特性
  * v<sub>CE</sub>>0.2V时，处于放大区域，C端与E端之间等价于流控电流源
 
 ![BJT特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-characteristic.png)
-
-### BJT模型
-
-使用两个二极管和流控电流源建模
-
-![BJT模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-model.png)
 
 ### BJT分段线性模型
 
@@ -218,6 +218,10 @@ v-i特性
 v-i特性
 
 ![BJT分段线性模型v-i特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-segment-model-vi.png)
+
+传递特性
+
+![BJT放大器传递特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-analysis.png)
 
 ## 参考资料
 
