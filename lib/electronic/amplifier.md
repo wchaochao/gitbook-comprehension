@@ -97,6 +97,29 @@ MOSFET符合SCS模型
 
 ![BJT放大器传递特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-analysis.png)
 
+## BJT小信号放大器
+
+### 小信号模型
+
+![BJT小信号放大器模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-small-singal-model.png)
+
+### 增量分析
+
+* 输出电流增量分析：i<sub>c</sub>=βi<sub>b</sub>
+* 输出电压增量分析：v<sub>o</sub>=-i<sub>c</sub>R<sub>L</sub>=-βi<sub>b</sub>R<sub>L</sub>=-βR<sub>L</sub>v<sub>i</sub>/R<sub>I</sub>
+* 小信号增益：A=v<sub>o</sub>/v<sub>i</sub>=-βR<sub>L</sub>/R<sub>I</sub>
+
+### 增量参数
+
+* 增量输入电阻：R<sub>I</sub>
+* 增量输出电阻：R<sub>L</sub>
+* 增量电流增益：-β(R<sub>L</sub>||R<sub>OUT</sub>)/R<sub>OUT</sub>
+* 增量功率增益：[β(R<sub>L</sub>||R<sub>OUT</sub>)]<sup>2</sup>/(R<sub>I</sub>R<sub>OUT</sub>)
+
+![BJT增量电阻](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-incremental-resistance.png)
+
+![BJT增量电流增益](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-incremental-i-gain.png)
+
 ## 差分放大器
 
 ### 组成
