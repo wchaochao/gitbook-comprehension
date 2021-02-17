@@ -26,7 +26,7 @@ MOSFET符合SCS模型
 
 约束输入使符合饱和原则
 
-* 有效输入电压范围：v<sub>T</sub> ~ v<sub>T</sub>+v<sub>k</sub>，v<sub>k</sub>=(-1+根号(1+2V<sub>S</sub>R<sub>L</sub>K))/R<sub>L</sub>K
+* 有效输入电压范围：v<sub>T</sub> ~ v<sub>T</sub>+v<sub>k</sub>，$v_k=\frac{-1+\sqrt{1+2V_SR_LK}}{R_LK}$
 * 有效输出电压范围：v<sub>k</sub> ~ V<sub>S</sub>
 * 有效输出电流范围：0 ~ Kv<sub>k</sub><sup>2</sup>/2
 
