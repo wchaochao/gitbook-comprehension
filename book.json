@@ -19,7 +19,8 @@
     "toggle-chapters",
     "include-codeblock",
     "anchors",
-    "anchor-navigation-ex"
+    "anchor-navigation-ex",
+    "mathjax"
   ],
   "pluginsConfig": {
     "disqus": {
@@ -49,7 +50,7 @@
     },
     "anchor-navigation-ex": {
       "showLevel": false,
-      "float": { 
+      "float": {
 	        "showLevelIcon": true,
 	        "level1Icon": "fa fa-hand-o-right",
 	        "level2Icon": "fa fa-hand-o-right",
