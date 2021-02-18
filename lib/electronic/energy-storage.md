@@ -89,7 +89,7 @@
 ### MOSFET栅极电容
 
 * 栅极G施加正电压时，会吸引源极S中的电子到沟道表面
-* 栅极与沟道之间形成一个平行极板电容，$C_{GS}=C_{OX}LW, C_{OX}=\frac{ε_{OX}}{d}$
+* 栅极与沟道之间形成一个平行极板电容，$C_{GS}=C_{OX}LW$， $C_{OX}=\frac{ε_{OX}}{d}$
 
 ![MOSFET栅极电容](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-capacitor.png)
 
@@ -134,3 +134,42 @@ SRC模型
 ![圆柱导体2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/ic-cylindrical-conductor-2.png)
 
 单位长度的电容和电感满足$\widetilde C \widetilde L=ε\mu_0$
+
+## 电路分析
+
+### 简单电路
+
+* 电压源驱动电容：$$i(t)=C\frac{dV(t)}{dt}$$
+* 电流源驱动电容：$$v(t)=\frac{1}{C}\int_{-∞}^{t}I(t)dt$$
+* 电流源驱动电感：$$v(t)=L\frac{dI(t)}{dt}$$
+* 电压源驱动电感：$$i(t)=\frac{1}{L}\int_{-∞}^{t}V(t)dt$$
+
+### 阶跃输入
+
+电压源驱动电容
+
+* 输入：$$V(t)=\begin{cases}0 & t\leq0 \\ V_0 & t>0\end{cases}$$
+* 输出：$$i(t)=C\frac{dV(t)}{dt}=CV_0\frac{du(t)}{dt}=CV_0\delta(t)$$
+
+![阶跃输入电容1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-capacitor-1.png)
+
+电流源驱动电容
+
+* 输入：$$I(t)=\begin{cases}0 & t\leq0 \\ I_0 & t>0\end{cases}$$
+* 输出：$$v(t)=\frac{1}{C}\int_{-∞}^{t}I(t)dt=\begin{cases}0 & t\leq0 \\ \frac{I_0t}{C} & t>0\end{cases}$$
+
+![阶跃输入电容2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-capacitor-2.png)
+
+电流源驱动电感
+
+* 输入：$$I(t)=\begin{cases}0 & t\leq0 \\ I_0 & t>0\end{cases}$$
+* 输出：$$v(t)=L\frac{dI(t)}{dt}=CI_0\frac{du(t)}{dt}=CI_0\delta(t)$$
+
+![阶跃输入电感1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-inductance-1.png)
+
+电压源驱动电感
+
+* 输入：$$V(t)=\begin{cases}0 & t\leq0 \\ V_0 & t>0\end{cases}$$
+* 输出：$$i(t)=\frac{1}{L}\int_{-∞}^{t}V(t)dt=\begin{cases}0 & t\leq0 \\ \frac{V_0t}{L} & t>0\end{cases}$$
+
+![阶跃输入电感2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-inductance-2.png)
