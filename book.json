@@ -20,7 +20,7 @@
     "include-codeblock",
     "anchors",
     "anchor-navigation-ex",
-    "katex"
+    "mathjax-single-dollar"
   ],
   "pluginsConfig": {
     "disqus": {
