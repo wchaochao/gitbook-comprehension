@@ -1,4 +1,4 @@
-# 数字逻辑
+# 数字抽象
 
 标签（空格分隔）： 理解
 
@@ -8,29 +8,28 @@
 
 将一定范围内的信号值集总为一个值
 
-### 二值化
+### 数字信号
 
-* 将信号值集总为两个值，表示真假、高低、开关、1/0等概念
-* 超过两个值时用多位二进制编码表示
+将信号值集总为两个值
 
-### 静态原则
+* 每个值表示真假、高低、开关、1/0等概念
+* 多个值时用多位二进制编码表示
 
-输入
+### 数字系统
 
-* 输入在0到V<sub>IL</sub>之间时识别为0
-* 输入在V<sub>IH</sub>到5V之间时识别为1
+符合静态原则，合法的输入要产生合法的输出
 
-输出
+* 发送器
+ * 输出为0时，输出在0到V<sub>OL</sub>之间
+ * 输出为1时，输出在V<sub>OH</sub>到5V之间
+* 接收器
+ * 输入在0到V<sub>IL</sub>之间时识别为0
+ * 输入在V<sub>IH</sub>到5V之间时识别为1
+* 噪声容限
+ * 逻辑0的噪声容限为V<sub>IL</sub>-V<sub>OL</sub>
+ * 逻辑1的噪声容限为V<sub>OH</sub>-V<sub>IH</sub>
 
-* 输出为0时，输出在0到V<sub>OL</sub>之间
-* 输出为1时，输出在V<sub>OH</sub>到5V之间
-
-噪声容限
-
-* 逻辑0的噪声容限为V<sub>IL</sub>-V<sub>OL</sub>
-* 逻辑1的噪声容限为V<sub>OH</sub>-V<sub>IH</sub>
-
-![二值化](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/static-principle.png)
+![静态原则](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/static-principle.png)
 
 ## 布尔逻辑
 
@@ -172,6 +171,23 @@
 
 * 输入：两个加数、低位进位
 * 输出：和、高位进位
+
+## 能量/信号电子系统
+
+### 研究
+
+* 源
+* 流动
+* 损耗
+* 控制
+* 存储
+
+### 表示
+
+* 能量系统：电压、电流直接表示
+* 信号系统
+ * 模拟信号系统：电压、电流直接表示
+ * 数字信号系统：模拟信号系统的离散化表示
 
 ## 参考资料
 

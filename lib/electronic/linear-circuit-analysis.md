@@ -4,9 +4,9 @@
 
 ---
 
-## 一般分析
+## 基本分析
 
-### 解线性方程
+### 解方程组
 
 * 标注支路电压、支路电流
 * 列B个元件方程，B为元件数
@@ -31,7 +31,7 @@
 
 ## 直觉分析
 
-元件合并法
+电路合并法
 
 * 电阻串联等价于一个等效电阻，电阻为各电阻之和
 * 电阻并联等价于一个等效电容，电容为各电容之和
@@ -72,7 +72,9 @@
 
 ### 叠加分析实例
 
-* 加法器：多个电压+相同电阻并联，输出电压为各电压源的平均值
+* 加法电路：多个电压+相同电阻并联，输出电压为各电压源的平均值
+
+![加法电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/adding-circuit.png)
 
 ## 等效分析
 
@@ -86,6 +88,8 @@
 * 电阻为线性网络独立源置为0时的等效电阻，R<sub>t</sub>=v<sub>t</sub>/i<sub>test</sub>|<sub>internal source=0</sub>
 * 接线端的元件特性为v<sub>t</sub>=v<sub>oc</sub> + i<sub>test</sub>R<sub>t</sub>
 
+![戴维南等效电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/Thevenin-circuit.png)
+
 ### 诺顿定理
 
 任意线性网络在一对给定接线端都可以抽象为一个电流源和一个电阻的并联，称为诺顿等效电路
@@ -94,9 +98,15 @@
 * 电阻为线性网络独立源置为0时的等效电阻，R<sub>t</sub>=v<sub>test</sub>/i<sub>t</sub>|<sub>internal source=0</sub>
 * 接线端的元件特性为i<sub>t</sub>=-i<sub>sc</sub> + v<sub>test</sub>/R<sub>t</sub>，R<sub>t</sub>=v<sub>oc</sub>/i<sub>sc</sub>
 
+![诺顿等效电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/Norton-circuit.png)
+
 ### 等效分析实例
 
 * 桥接电路：(R1+R2)||(R4+R5)，中间连一个R3，对R3两端进行等效分析
+
+![桥接电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/bridge-circuit.png)
+
+![桥接电路分析](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/bridge-circuit-analysis.png)
 
 ## 参考资料
 

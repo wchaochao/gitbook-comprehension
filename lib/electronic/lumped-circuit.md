@@ -19,6 +19,8 @@
 * 支路电压
 * 支路电流
 
+![集总元件](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/lumped-element.png)
+
 ## 电源
 
 ### 独立源
