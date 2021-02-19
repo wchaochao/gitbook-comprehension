@@ -5,9 +5,13 @@
 ## JavaScript系列
 
 * [数据结构](lib/javascript/data-structure.md)
-* [异步编程](lib/javascript/async.md)
 * [ES6语法](lib/javascript/grammar.md)
 * [ES6 API](lib/javascript/api.md)
+
+## JavaScript异步编程
+
+* [Promise](lib/javascript-async/promise.md)
+* [异步处理](lib/javascript-async/index.md)
 
 ## 浏览器系列
 
@@ -17,7 +21,7 @@
 
 * [NodeJS基础](lib/nodejs/base.md)
 
-## 模电数电系列
+## 电子与电路学
 
 * [集总电路](lib/electronic/lumped-circuit.md)
 * [线性电路分析](lib/electronic/linear-circuit-analysis.md)
