@@ -21,7 +21,7 @@
 
 * [NodeJS基础](lib/nodejs/base.md)
 
-## 电子与电路学
+## 电路与电子学
 
 * [集总电路](lib/electronic/lumped-circuit.md)
 * [线性电路分析](lib/electronic/linear-circuit-analysis.md)
