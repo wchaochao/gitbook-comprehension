@@ -12,8 +12,10 @@
 
 ## JavaScript异步编程
 
+* 回调
 * Promise
-* 异步处理
+* Generator
+* Async/Await
 
 ## 浏览器系列
 
@@ -46,26 +48,37 @@ nodejs
 * 深入浅出nodejs
 * [NodeJS事件循环](https://blog.insiderattack.net/event-loop-and-the-big-picture-nodejs-event-loop-part-1-1cb67a182810)
 
+JavaScript
+
+* JavaScript异步编程
+* JavaScript面向对象编程
+* JavaScript模块化编程
+
 javascript异步编程
 
-* Async JavaScript
 * [javascript标准教程](https://www.showapi.com/book/view/2129/0)
 * [ES6入门](https://es6.ruanyifeng.com)
 * [javascript.info](https://javascript.info/promise-chaining)
 * [Eloquent JavaScript](https://eloquentjavascript.net)
 * [Speaking JavaScript](speakingjs.com/es5/index.html#toc_ch01)
+* Async JavaScript
 
 promise
 
+* [Promise迷你书](http://liubin.org/promises-book/#race-delay-timeout)
+* prfun.js
 * q.js
 * Bluebird
-* [Promise迷你书](http://liubin.org/promises-book/#race-delay-timeout)
-
 
 JavaScript模块化编程
 
 * [JavaScript Modules](https://www.freecodecamp.org/news/javascript-modules-a-beginner-s-guide-783f7d7a5fcc/?source=latest---------1)
 * [Learning JavaScript Design Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)
+
+浏览器
+
+* 网络请求
+* 本地存储
 
 ueditor
 
@@ -74,15 +87,21 @@ ueditor
 计算机
 
 * 电路与电子学
-* 信号与系统
 * 计算机结构
 * 操作系统
 * 编译原理
 * 数据结构和算法
 * 编程
+* 信号与系统
 * 计算机网络
 * 通信原理
 
 电路
 
 * 模电数电基础
+
+编程
+
+* 重构
+* 设计模式
+* 代码整洁之道

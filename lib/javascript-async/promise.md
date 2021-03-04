@@ -4,7 +4,7 @@
 
 ---
 
-## 原理
+## 理解
 
 表示一个unknown value
 
@@ -24,13 +24,13 @@
 
 第一次有效
 
-* value为非thenable时，fulfill
+* value为非thenable时，直接fulfill
 * value为Promise时
  * 该Promise为原Promise时，reject
  * 该Promise不为原Promise时，等该Promise settled后再fulfill或reject
 * value为其他thenable时，尝试调用then方法
   * then方法抛出Error时，reject
-  * then方法调用传入的resolve时，对resolve值继续进行判断
+  * then方法调用传入的resolve时，继续resolve
   * then方法调用传入的reject时，reject
 
 ### fulfill(value)
@@ -39,10 +39,6 @@
 
 * 状态变为fulfilled value
 * 异步执行所有成功回调
- * 回调不为函数，回调所属promise resolve
- * 回调为函数，尝试执行回调
-  * 回调报错时，回调所属promise reject
-  * 回调返回值时，回调所属promise resolve返回值
 
 ### reject(error)
 
@@ -50,8 +46,15 @@
 
 * 状态变为rejected value
 * 异步执行所有失败回调
- * 回调不为函数，回调所属promise reject
- * 回调为函数，尝试执行回调
+
+### trigger(handlers, argument)
+
+异步执行所有回调
+
+* 回调不为函数时
+ * 成功回调默认为返回参数的回调
+ * 失败回调默认为抛出错误的回调
+* 尝试执行回调
   * 回调报错时，回调所属promise reject
   * 回调返回值时，回调所属promise resolve返回值
 
@@ -65,7 +68,8 @@
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-  // 异步处理完成时resolve(value) or reject(error)
+  // 异步处理成功时resolve(value)
+  // 异步处理失败时reject(error)
 })
 ```
 
@@ -80,15 +84,33 @@ const promise = new Promise((resolve, reject) => {
 * 原Promise settled时，直接异步执行回调
 
 ```javascript
-promise.then(onFulfilled, onRejected)
+const promise = new Promise(function(resolve, reject){
+  resolve('传递给then的值')
+})
+promise.then(function (value) {
+  console.log(value)
+}, function (error) {
+  console.error(error)
+})
 ```
 
 ### Promise.prototype.catch(onRejected)
 
 捕获错误，相当于then(undefined, onRejected)
 
-* 可以捕获之前所有promise的错误
+* 可以捕获之前所有promise回调中的错误
 * ES3中需要使用promise['catch']
+
+```javascript
+const promise = new Promise(function(resolve, reject){
+  reject(new Error('传递给catch的err'))
+})
+promise.then(function (value) {
+  console.log(value)
+}).catch(function (error) {
+  console.error(error)
+})
+```
 
 ### Promise.prototype.finally(onFinally)
 
@@ -98,6 +120,13 @@ promise.then(onFulfilled, onRejected)
 * onFinally是函数时
   * 执行onFinally，无参数
   * 返回值使用Promise.resolve转换为Promise，成功的时候返回原promise的值
+
+```javascript
+let loading = true
+getData().finally(() => {
+  loading = false
+})
+```
 
 ## 静态方法
 
@@ -109,7 +138,9 @@ promise.then(onFulfilled, onRejected)
 * value为其他值时，进行resolve值判断
 
 ```javascript
-Promise.resolve(1)
+Promise.resolve(value)
+Promise.resolve(promise)
+Promise.resolve(thenable)
 ```
 
 ### Promise.reject(error)
@@ -147,16 +178,91 @@ function delay (ms) {
 }
 
 const timeoutPromise = delay(1000).then(() => {
-  const error = new Error('timeout')
-  error.customeType = 'timeout'
+  const error = new TimeoutError('timeout')
   return Promise.reject(error)
 })
 Promise.race(promise, timeoutPromise).then(() => {
   // 操作成功
 }).catch(e => {
-  if (e.customeType === 'timeout') {
+  if (e instanceof TimeoutError) {
     // 超时
   }
+})
+```
+
+## 异步处理
+
+通过链式调用处理异步任务
+
+### 错误处理
+
+在链式调用的最后catch错误
+
+```javascript
+promise.then(function1)
+  .then(function2)
+  .catch(errorHandler)
+```
+
+catch无法捕获在回调中异步抛出的错误
+
+```javascript
+promise.then(() => {
+  setTimeout(() => {
+    throw new Error('async error')
+  })
+}).catch(e => {
+  // 捕获不到async error
+})
+```
+
+### 串行
+
+链式调用
+
+```javascript
+promise.then(function1)
+  .then(function2)
+  .then(function3)
+```
+
+使用reduce
+
+```javascript
+promises.reduce((result, item) => {
+    return Promise.resolve(result).then(val => {
+      return handler(val, item)
+    })
+}, undefined)
+```
+
+### 并行
+
+使用循环
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  promise[i].then(handler)
+}
+```
+
+使用Promise.all
+
+```javascript
+Promise.all(promises).then(handler)
+```
+
+### 单元测试
+
+返回promise
+
+```javascript
+describe('Promise', () => {
+  it('return promise', () => {
+    return promise.then(() => {
+      // assert
+    })
+  })
 })
 ```
 
@@ -174,3 +280,5 @@ Promise.race(promise, timeoutPromise).then(() => {
 * [Promise/A+](https://promisesaplus.com/)
 * [Promise迷你书](http://liubin.org/promises-book/)
 * [Promise反模式](http://taoofcode.net/promise-anti-patterns/)
+* [w3c promise guide](https://www.w3.org/2001/tag/doc/promises-guide)
+* [ES6 Promise Poposal](https://github.com/domenic/promises-unwrapping)

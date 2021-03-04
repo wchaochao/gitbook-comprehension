@@ -10,8 +10,10 @@
 
 ## JavaScript异步编程
 
+* [回调](lib/javascript-async/callback.md)
 * [Promise](lib/javascript-async/promise.md)
-* [异步处理](lib/javascript-async/index.md)
+* [Generator](lib/javascript-async/generator.md)
+* [Async/Await](lib/javascript-async/await.md)
 
 ## 浏览器系列
 
