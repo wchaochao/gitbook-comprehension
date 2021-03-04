@@ -23,8 +23,9 @@
 
 ### 开关逻辑门
 
-* 开关串联：逻辑与
-* 开关并联：逻辑或
+* 开关+电源电阻：反相器
+* 开关串联+电源电阻：与非门
+* 开关并联+电源电阻：或非门
 
 ## MOSFET开关
 
@@ -210,7 +211,7 @@ v-i特性
 ### BJT分段线性模型
 
 * i<sub>B</sub>=0时，两个二极管断开，C端与E端断开
-* i<sub>B</sub>>0且v<sub>CE</sub>>0.2V时，BC之间的二极管断开，BE之间的二极管连通，i<sub>C</sub>=(βi<sub>B</sub>，i<sub>E</sub>=(1+β)i<sub>B</sub>，β一般为100
+* i<sub>B</sub>>0且v<sub>CE</sub>>0.2V时，BC之间的二极管断开，BE之间的二极管连通，i<sub>C</sub>=βi<sub>B</sub>，i<sub>E</sub>=(1+β)i<sub>B</sub>，β一般为100
 * i<sub>B</sub>>0且v<sub>CE</sub>=0.2V时，两个二极管都连通，C端与E端短路
 
 ![BJT分段线性模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-segment-model.png)

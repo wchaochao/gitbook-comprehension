@@ -93,7 +93,7 @@ MOSFET符合SCS模型
 * v<sub>o</sub>=V<sub>S</sub>-i<sub>C</sub>R<sub>L</sub>
 * i<sub>C</sub>=βi<sub>B</sub>
 * i<sub>B</sub>=(v<sub>IN</sub>-0.6)/R<sub>1</sub>
-* v<sub>IN</sub>>=0.6且v<sub>o</sub>0.2
+* v<sub>IN</sub>>=0.6且v<sub>o</sub>>0.2
 
 ![BJT放大器传递特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-analysis.png)
 
