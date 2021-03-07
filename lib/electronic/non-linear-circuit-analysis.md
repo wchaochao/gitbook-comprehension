@@ -8,7 +8,7 @@
 
 ### 二极管元件
 
-I<sub>D</sub>=I<sub>s</sub>(e<sup>V<sub>D</sub>/V<sub>TH</sub></sup>-1)
+$I_D=I_s(e^{\frac{V_D}{V_{TH}}}-1)$
 
 ![二极管符号](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/diode.png)
 
@@ -16,7 +16,7 @@ I<sub>D</sub>=I<sub>s</sub>(e<sup>V<sub>D</sub>/V<sub>TH</sub></sup>-1)
 
 ### 平方律元件
 
-I<sub>DS</sub>=K(V<sub>DS</sub>-V<sub>T</sub>)<sup>2</sup>/2，V<sub>DS</sub>>=V<sub>T</sub>
+$I_{DS}=\frac{K(V_{DS}-V_T)^2}{2}，V_{DS}>=V_T$
 
 ![平方律元件](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/square-characteristic.png)
 
@@ -40,14 +40,14 @@ I<sub>DS</sub>=K(V<sub>DS</sub>-V<sub>T</sub>)<sup>2</sup>/2，V<sub>DS</sub>>=V
 
 ### 理想二级管
 
-* 二极管开通：短路，v<sub>D</sub>=0，i<sub>D</sub>为正
-* 二极管断开：断路，i<sub>D</sub>=0，v<sub>D</sub>为负
+* 二极管开通：短路，$v_D=0，i_D>0$
+* 二极管断开：断路，$i_D=0，v_D<0$
 
 ![理想二极管](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/ideal-diode.png)
 
 ## 增量分析
 
-电路在一个工作点上对一个小扰动的响应是线性的，x<sub>B</sub>=f(x<sub>A</sub>)，则x<sub>B</sub>在工作点X<sub>A</sub>的增量变化为x<sub>b</sub>=df(x<sub>A</sub>)/dx<sub>A</sub>|<sub>x<sub>A</sub>=X<sub>A</sub></sub>x<sub>a</sub>
+电路在一个工作点上对一个小扰动的响应是线性的，$x_B=f(x_A)$，则$x_B$在工作点$X_A$的增量变化为$x_b=\frac{df(x_A)}{dx_A}|_{x_A=X_A}x_a$
 
 * 设小信号电源为0，得到DC子电路，根据非线性分析求工作点电流、电压
 * 设DC电源为0，根据工作点电流、电压使用小信号模型替代元件，得到小信号子电路，根据线性分析求增量电流、增量电压
@@ -59,7 +59,7 @@ I<sub>DS</sub>=K(V<sub>DS</sub>-V<sub>T</sub>)<sup>2</sup>/2，V<sub>DS</sub>>=V
 * 理想电压源：短路
 * 理想电流源：断路
 * 理想线性电阻R：理想线性电阻R
-* MOSFET放大器：压控电流源i<sub>ds</sub>=k(V<sub>GS</sub>-V<sub>T</sub>)v<sub>gs</sub>
+* MOSFET放大器：压控电流源$i_{ds}=k(V_{GS}-V_T)v_{gs}$
 
 ![增量分析](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/small-signal-model.png)
 
