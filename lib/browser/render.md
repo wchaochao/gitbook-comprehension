@@ -4,46 +4,139 @@
 
 ---
 
-## 引擎
+## 渲染引擎
 
-### 渲染引擎
-
-* 将HTML解析为DOM树
-* 将CSS解析为CSSOM树
+* HTML被HTML引擎解析为DOM树
+* CSS被CSS引擎解析为CSSOM树
 * DOM树和CSSOM树结合为渲染树
 * 渲染树变化时进行重排和重绘
 
-### JavaScript引擎
+### HTML引擎
 
-* 将JavaScript解析为ESTree
-* 将ESTree翻译为字节码
-* 解释执行字节码，除可执行JavaScript API外还可执行DOM API、CSSOM API、Web API
+* HTML字符流会被HTML词法解析器解析为HTML Token流
+* HTML Token流会被HTML语法解析器解析为DOM树
+
+#### HTML词法解析
+
+* 声明：文档类型声明
+* 标签：开始标签、结束标签
+* 属性：属性名、属性值
+* 文本：Unicode字符
+* 实体：命名实体、十进制实体、十六进制实体
+* 其他字符数据：注释、指令、CDATA数据
+
+#### HTML语法解析
+
+将HTML Token解析为对应的DOM节点
+
+* Document: 文档节点
+ * HTMLDocument：HTML文档节点
+* DocumentType: 文档类型节点
+* DocumentFragment: 文档片段节点
+* Element: 元素节点
+ * HTMLElement：HTML元素节点
+* Attr: 属性节点
+* CharacterData: 字符数据节点
+ * Text: 文本节点
+ * CDATASection: CDATA节点
+ * ProcessingInstruction: 指令节点
+ * Comment：注释节点
+
+资源类的HTML元素节点会加载相应的资源
+
+* link：加载CSS
+* script：加载js
+* img：加载图片
+* audio：加载音频
+* video：加载视频
+* iframe：加载html
+
+### CSS引擎
+
+* CSS字符流会被CSS词法解析器解析为CSS Token流
+* CSS Token流会被CSS语法解析器解析为CSSOM树
+
+#### CSS词法解析
+
+* 选择器
+* 样式规则
+
+#### CSS语法解析
+
+### 重排
+
+* 盒模型尺寸、位置发生更改会导致重排
+
+### 重绘
+
+* 盒模型字体、颜色、背景颜色等样式发生更改会导致重绘
+
+## JavaScript引擎
+
+* JavaScript源代码会被JavaScript词法分析器解析为JavaScript Token流
+* JavaScript Token流会被JavaScript语法分析器解析为ESTree
+* ESTree被翻译为优化后的JavaScript字节码
+* 执行JavaScript字节码，操作DOM、CSSOM、Web API
+
+### JavaScript词法解析
+
+非Token类
+
+* 空白字符：`\t \v \f 空格 不可见空格`
+* 行终结符：`\r \n 行分隔符 段分隔符`
+* 注释：单行注释、多行注释
+
+Token类型
+
+* 标志符名
+ * 保留字：关键字、未来保留字、Null字面量、Boolean字面量
+ * 标志符：保留字外的标志符名
+* 符号：运算符号、语句符号
+* 字面量
+ * Null字面量
+ * Boolean字面量
+ * 数字字面量：整数、小数、科学计数法
+ * 字符串字面量：单引号或双引号包围的普通字符、转义字符、行延续符
+ * 正则字面量
+
+### JavaScript语法解析
+
+* 字面量节点
+* 表达式节点
+* 语句节点
+* 函数节点
+* 程序节点
+
+### JavaScript执行
+
+#### 上下文
+
+* 执行全局代码时全局上下文入栈
+* 执行函数时将函数上下文入栈
+* 执行完函数时函数上下文出栈
+
+#### 同步任务
+
+* 命名解析通过Reference Record处理
+* 对象属性通过Property Descriptor处理
+* 函数参数通过List处理
+* 函数代码通过Abstract Closure处理
+* 作用域通过Environment Record处理
+* 语句执行通过Completion Record处理
+
+#### 异步任务
+
+* 执行setTimeout、setInterval时，将定时器下发到定时器线程，计数结束时将定时器回调加入到宏任务中
+* 执行http请求，将http请求下发到http线程，请求状态发生变更时将相应的回调加入宏任务中
+* 执行Promise，promise状态发生变更时将相应的回调加入到微任务中
+* 执行MutationObserver，节点发生变更时将相应的回调加入微任务中
 
 ### 互斥
 
 JavaScript引擎线程和渲染线程互斥
 
 * 渲染时会阻塞JavaScript执行
-* JavaScript执行时会阻塞页面渲染
-
-## JavaScript执行
-
-### 同步任务
-
-顺序执行
-
-* 执行全局代码时全局上下文入栈
-* 执行函数时将函数上下文入栈
-* 执行完函数时函数上下午出栈
-
-### 异步任务
-
-通过事件循环执行
-
-* 执行setTimeout、setInterval，将定时器下发到定时器线程，计数结束时将定时器回调加入到宏任务中
-* 执行http请求，将http请求下发到http线程，请求状态发生变更时将相应的回调加入宏任务中
-* 执行Promise，promise状态发生变更时将相应的回调加入到微任务中
-* 执行MutationObserver，节点发生变更时将相应的回调加入微任务中
+* JavaScript下载、执行会阻塞页面渲染
 
 ## 事件循环
 

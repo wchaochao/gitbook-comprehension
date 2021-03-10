@@ -61,11 +61,11 @@ javascript异步编程
 * [javascript.info](https://javascript.info/promise-chaining)
 * [Eloquent JavaScript](https://eloquentjavascript.net)
 * [Speaking JavaScript](speakingjs.com/es5/index.html#toc_ch01)
+* [ECMASCript标准](https://tc39.es/ecma262/)
 * Async JavaScript
 
 promise
 
-* [Promise迷你书](http://liubin.org/promises-book/#race-delay-timeout)
 * prfun.js
 * q.js
 * Bluebird
@@ -102,6 +102,6 @@ ueditor
 
 编程
 
-* 重构
+* [重构](https://memberservices.informit.com/my_account/webedition/9780135425664/html/toc.html)
 * 设计模式
 * 代码整洁之道

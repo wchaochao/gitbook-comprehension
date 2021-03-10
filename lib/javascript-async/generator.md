@@ -70,6 +70,22 @@ generator.throw(new Error("The answer is not found in my database")); // (2)
 * Promise成功时通过next返回值
 * Promise失败时通过throw返回值
 
+```javascript
+function run (generator) {
+  const it = generator()
+  return go(it.next())
+
+  function go (result) {
+    if (result.done) {
+      return Promise.resolve(result.value)
+    }
+
+    return result.value.then(value => go(it.next(value)))
+      .catch(err => go(it.throw(err)))
+  }
+}
+```
+
 ### 错误处理
 
 在Generator中try/catch
@@ -83,3 +99,5 @@ generator.throw(new Error("The answer is not found in my database")); // (2)
 * [thunkify](https://github.com/tj/node-thunkify)：处理nodejs的回调
 * [co](https://github.com/tj/co)：自动化Generator
 * [koa](https://github.com/koajs/koa)：http框架
+
+## 参考资料

@@ -275,7 +275,7 @@ describe('Promise', () => {
 * [q.js](https://github.com/kriskowal/q/blob/master/q.js)：Promise扩展类库，实现了 Promises 和 Deferreds 等规范
 * [Bluebird](https://github.com/petkaantonov/bluebird)：Promise扩展类库，扩展了取消promise对象的运行，取得promise的运行进度，以及错误处理的扩展检测等非常丰富的功能
 
-## 推荐资料
+## 参考资料
 
 * [Promise/A+](https://promisesaplus.com/)
 * [Promise迷你书](http://liubin.org/promises-book/)
