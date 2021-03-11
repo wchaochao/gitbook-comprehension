@@ -32,3 +32,4 @@
 * [控制元件](lib/electronic/control.md)
 * [放大器](lib/electronic/amplifier.md)
 * [储能元件](lib/electronic/energy-storage.md)
+* [一阶暂态过程](lib/electronic/first-order-transient-process.md)

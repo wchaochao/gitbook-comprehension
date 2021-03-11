@@ -210,3 +210,7 @@ $$\begin{cases}\delta(t)=0 & t\neq0 \\ \int_{-∞}^{t}\delta(t)dt=u(t) \\ \int_{
 * 输出：$$v(t)=\frac{1}{C}\int_{-∞}^{t}I(t)dt=\frac{Q}{C}u(t)$$
 
 ![冲激输入电容2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/impulse-input-capacitor-2.png)
+
+## 参考资料
+
+* 《模拟和数字电子电路基础》

@@ -156,3 +156,7 @@ MOSFET符合SCS模型
 * $A_C=0$
 
 ![共模模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/common-model.png)
+
+## 参考资料
+
+* 《模拟和数字电子电路基础》
