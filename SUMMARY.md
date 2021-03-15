@@ -8,6 +8,19 @@
 * [ES6语法](lib/javascript/grammar.md)
 * [ES6 API](lib/javascript/api.md)
 
+## JavaScript执行
+
+* [标志符解析](lib/javascript-execute/identifier-parse.md)
+
+## JavaScript函数式编程
+
+* [函数](lib/javascript-function/function.md)
+
+## JavaScript面向对象编程
+
+* [对象](lib/javascript-oop/object.md)
+* [原型继承](lib/javascript-oop/prototype-inherite.md)
+
 ## JavaScript异步编程
 
 * [回调](lib/javascript-async/callback.md)
