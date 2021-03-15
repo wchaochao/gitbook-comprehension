@@ -4,54 +4,75 @@
 
 ---
 
-## 串联RC电路
+## RC电路
 
-### 阶跃输入
+### 电路分析
 
-#### 电路分析
+节点分析得
+    $$0 = \frac{v_c - v_i}{R} + C\frac{dv_c}{dt}$$
 
-节点分析得$$0 = \frac{v_c - v_1}{R} + C\frac{dv_c}{dt}$$
-写为非齐次线性一阶常微分方程$$\frac{dv_c}{dt} + \frac{v_c}{RC} = \frac{v_1}{RC}$$
-全解为齐次解和特解之和$$\begin{cases} \frac{dv_{ch}}{dt} + \frac{v_{ch}}{RC} = 0 \\ \frac{dv_{cp}}{dt} + \frac{v_{cp}}{RC} = \frac{V}{RC} \end{cases}$$
+写为非齐次线性一阶常微分方程
+    $$\frac{dv_c}{dt} + \frac{v_c}{RC} = \frac{v_i}{RC}$$
 
-* 齐次解为$v_{ch} = Ae^{st}$，代入齐次式得$s = -\frac{1}{RC}$
-* 特解为$v_{cp} = K$，代入特解式得$K = V$
-* 全解为$v_c = Ae^{-\frac{t}{RC}} + V$，代入初始条件$v(0) = V_0$，得$A = V_0 - V$，，为零状态响应和零状态输入之和
-* 全解$v_c = (V_0 - V)e^{-\frac{t}{RC}} + V$，为零状态输入$v_c = V_0e^{-\frac{t}{RC}}$和零状态响应$v_c = V(1 - e^{-\frac{t}{RC}})$之和
+全解为齐次解和特解之和
+    $$\begin{cases} \frac{dv_{ch}}{dt} + \frac{v_{ch}}{RC} = 0 \\ \frac{dv_{cp}}{dt} + \frac{v_{cp}}{RC} = \frac{V}{RC} \end{cases}$$
+
+* 齐次解为$v_{ch} = Ae^{st}$，代入齐次式得$s = -\frac{1}{\tau}$，时间常数$\tau=RC$
+* 特解为$v_{cp} = V_1$，代入特解式得终值$V_1 = V$
+* 全解为$v_c = Ae^{-\frac{t}{\tau}} + V_1$，代入初始条件$v(0) = V_0$，得$A = V_0 - V_1$，
+* 全解$v_c = V_0e^{-\frac{t}{\tau}} + V_1(1 - e^{-\frac{t}{\tau}})$，为零状态输入和零状态响应之和
+* 电流为$i_c = \frac{V_1 - V_0}{R}e^{-\frac{t}{\tau}}$
 
 ![串联RC](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-rc.png)
 
-#### 图形分析
+### 图形分析
 
-* $t = 0$时，曲线斜率为$-\frac{A}{\tau}, \ \tau=RC$
-* $t = \tau$时，曲线值为$\frac{A}{e} + V$
-* $t = 5\tau$，曲线值接近V
-
-#### 充电过程
-
-$V>V_0$，电容进行充电
-
-* $t = 0$时，曲线斜率为$\frac{V - V_0}{\tau}$
-* $t = \tau$时，曲线值为$V - \frac{V - V_0}{e}V$
-* $t = 5\tau$，曲线值接近V
-
-#### 放电过程
-
-$V<V_0$，电容进行放电
-
-* $t = 0$时，曲线斜率为$-\frac{V_0 - V}{\tau}$
-* $t = \tau$时，曲线值为$V + \frac{V_0 - V}{e}V$
-* $t = 5\tau$，曲线值接近V
+* $t = 0$时，曲线斜率为$-\frac{A}{\tau}$
+* $t = \tau$时，曲线值为$\frac{A}{e} + V_1$
+* $t = 5\tau$，曲线值接近$V_1$
 
 ### 方波输入
 
 电容改变了输入方波的形状
 
-* 时间常数RC远小于脉冲长度时，电容波形与输入波形相似
-* 时间常数RC的5倍小于脉冲长度时，电容完成完整的充放电
-* 时间常数RC远大于脉冲长度时，电容电压为输入电压的积分，$v_c = \frac{1}{RC}\int_{0}^{t}v_idt$，接近于0
+* 时间常数远小于脉冲长度时，输出波形与输入波形相似
+* 时间常数的5倍小于脉冲长度时，电容完成完整的充放电
+* 时间常数RC远大于脉冲长度时，电容电压为输入电压的积分，$v_c = \frac{1}{\tau}\int_{0}^{t}v_idt$，接近于0
 
 ![串联RC-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-rc-square.png)
+
+## RL电路
+
+### 电路分析
+
+节点分析得
+    $$i_LR + L\frac{di_L}{dt} = v_s$$
+
+写为非齐次线性一阶常微分方程
+    $$\frac{di_L}{dt} + \frac{i_LR}{L} = \frac{v_s}{L}$$
+
+全解为齐次解和特解之和
+    $$\begin{cases} \frac{di_{LH}}{dt} + \frac{i_{LH}R}{L} = 0 \\ \frac{di_{LP}}{dt} + \frac{i_{LP}R}{L} = \frac{V}{L} \end{cases}$$
+
+* 齐次解为$i_{LH} = Ae^{st}$，代入齐次式得$s = -\frac{1}{\tau}$，时间常数$\tau=\frac{L}{R}$
+* 特解为$i_{LP} = I_1$，代入特解式得终值$I_1 = \frac{V}{R}$
+* 全解为$i_L = Ae^{-\frac{t}{\tau}} + I_1$，代入初始条件$I(0) = I_0$，得$A = I_0 - I_1$，
+* 全解$i_L = I_0e^{-\frac{t}{\tau}} + I_1(1 - e^{-\frac{t}{\tau}})$，为零状态输入和零状态响应之和
+* 电流为$v_L = (I_1 - I_0)Re^{-\frac{t}{\tau}}$
+
+![串联RL](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL.png)
+
+### 图形分析
+
+* $t = 0$时，曲线斜率为$-\frac{A}{\tau}$
+* $t = \tau$时，曲线值为$\frac{A}{e} + I_1$
+* $t = 5\tau$，曲线值接近$I_1$
+
+### 方波输入
+
+电感改变了输入方波的形状
+
+![串联RL-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL-square.png)
 
 ## 参考资料
 
