@@ -43,9 +43,9 @@
 | HasSuperBinding() | 是否绑定了super |
 | WithBaseObject() | 绑定对象 |
 
-## declarative Environments Records
+## declarative Environments Record
 
-声明式环境记录项
+声明式环境记录项，继承自Environments Record
 
 * 由函数、变量声明、cause语句等产生
 
@@ -54,21 +54,43 @@
 函数式环境记录项
 
 * 由函数产生
-* 记录函数中的this、参数、super和顶层标志符
+* 记录函数中的this、super、参数和顶层标志符
 
 ### module Environment Record
 
 模块式环境记录项
 
-* 有模块产生
+* 由模块产生
 * 记录模块中的import值和顶层标志符
 
 ## object Environment Record
 
-对象式环境记录项
+对象式环境记录项，继承自Environments Record
 
-* 由with语句产生
-* 有一个绑定对象，标志符绑定操作等价于绑定对象的属性操作
+* 由with语句产生，只绑定可变标志符
+* 有一个绑定对象
+ * 标志符绑定操作等价于绑定对象的属性操作
+ * 绑定对象可通过Symbol.unscopables排除掉不想被记录的属性
+
+### 特定内部状态
+
+| 内部状态 | 类型 | 描述 |
+| --- | --- | --- |
+| binding object | Object | 绑定对象 |
+| withEnvironment | Boolean | 是否将绑定对象作为this值，默认为false |
+
+### 特定内部方法
+
+#### HasBinding(N)
+
+* N不是绑定对象的属性，返回false
+* N是绑定对象是属性
+ * withEnvironment为false，返回true
+ * withEnvironment为true且N不在绑定对象的Symbol.unscopables中，返回true
+
+#### CreateMutableBinding(N, D)
+
+* 设置属性的属性描述符
 
 ## global Environment Record
 
