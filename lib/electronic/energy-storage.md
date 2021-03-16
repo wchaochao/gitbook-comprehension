@@ -37,18 +37,8 @@
 
 ### 串并联
 
-* 串联：l增加，电容减少，总电容的倒数为各电容的倒数之和
-* 并联：A增加，电容增加，总电容为各电容之和
-
-### 电荷守恒
-
-开关闭合时，电容存储的能量发生损耗
-
-* 总电荷：$Q=q_1(t)+q_2(t)=Q_1+Q_2$
-* 总电容：$C=C_1+C_2$
-* 电压：$v=\frac{Q}{C}=\frac{Q_1+Q_2}{C_1+C_2}$
-
-![电荷守恒](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/charge-conservation.png)
+* 串联：电容减少，总电容的倒数为各电容的倒数之和
+* 并联：电容增加，总电容为各电容之和
 
 ### 实际电容
 
@@ -87,18 +77,8 @@
 
 ### 串并联
 
-* 串联：N增加，电感增加，总电感为各电感之和
-* 并联：电感减少，总电感的倒数为各电感的倒数之和
-
-### 磁链守恒
-
-开关断开时，电感存储的能量发生损耗
-
-* 总磁链：$\lambda=\lambda_1(t)+\lambda_2(t)=\lambda_1+\lambda_2$
-* 总电感：$L=L_1+L_2$
-* 电流：$i=\frac{\lambda}{L}=\frac{\lambda_1+\lambda_2}{L_1+L_2}$
-
-![磁链守恒](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/flux-conservation.png)
+* 串联：电感增加，总电感为各电感之和
+* 并联：总电感的倒数为各电感的倒数之和
 
 ### 实际电感
 
@@ -157,59 +137,45 @@ SRC模型
 
 ## 电路分析
 
-### 简单电路
+### 电压源驱动电容
 
-* 电压源驱动电容：$$i(t)=\frac{dq(t)}{dt}=C\frac{dV(t)}{dt}$$
-* 电流源驱动电容：$$v(t)=\frac{q(t)}{C}=\frac{1}{C}\int_{-∞}^{t}I(t)dt$$
-* 电流源驱动电感：$$v(t)=\frac{d\lambda(t)}{dt}=L\frac{dI(t)}{dt}$$
-* 电压源驱动电感：$$i(t)=\frac{\lambda(t)}{L}=\frac{1}{L}\int_{-∞}^{t}V(t)dt$$
-
-### 阶跃输入
-
-电压源驱动电容
-
+* 元件方程：$$i(t)=\frac{dq(t)}{dt}=C\frac{dV(t)}{dt}$$
 * 输入：$$V(t)=\begin{cases}0 & t\leq0 \\ V_0 & t>0\end{cases}$$
 * 输出：$$i(t)=C\frac{dV(t)}{dt}=CV_0\frac{du(t)}{dt}=CV_0\delta(t)$$
 
 ![阶跃输入电容1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-capacitor-1.png)
 
-电流源驱动电容
+### 电流源驱动电容
 
+* 元件方程：$$v(t)=\frac{q(t)}{C}=\frac{1}{C}\int_{-∞}^{t}I(t)dt$$
 * 输入：$$I(t)=\begin{cases}0 & t\leq0 \\ I_0 & t>0\end{cases}$$
 * 输出：$$v(t)=\frac{1}{C}\int_{-∞}^{t}I(t)dt=\begin{cases}0 & t\leq0 \\ \frac{I_0t}{C} & t>0\end{cases}$$
 
 ![阶跃输入电容2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-capacitor-2.png)
 
-电流源驱动电感
+### 电流源驱动电感
 
+* 元件方程：$$v(t)=\frac{d\lambda(t)}{dt}=L\frac{dI(t)}{dt}$$
 * 输入：$$I(t)=\begin{cases}0 & t\leq0 \\ I_0 & t>0\end{cases}$$
 * 输出：$$v(t)=L\frac{dI(t)}{dt}=LI_0\frac{du(t)}{dt}=LI_0\delta(t)$$
 
 ![阶跃输入电感1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-inductance-1.png)
 
-电压源驱动电感
+### 电压源驱动电感
 
+* 元件方程：$$i(t)=\frac{\lambda(t)}{L}=\frac{1}{L}\int_{-∞}^{t}V(t)dt$$
 * 输入：$$V(t)=\begin{cases}0 & t\leq0 \\ V_0 & t>0\end{cases}$$
 * 输出：$$i(t)=\frac{1}{L}\int_{-∞}^{t}V(t)dt=\begin{cases}0 & t\leq0 \\ \frac{V_0t}{L} & t>0\end{cases}$$
 
 ![阶跃输入电感2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/step-input-inductance-2.png)
 
-### 冲激输入
-
-冲激函数
+### 冲激函数
 
 $$\begin{cases}\delta(t)=0 & t\neq0 \\ \int_{-∞}^{t}\delta(t)dt=u(t) \\ \int_{-∞}^{+∞}\delta(t)dt=1\end{cases}$$
 
 ![冲激函数1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/impulse-function-1.png)
 
 ![冲激函数2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/impulse-function-2.png)
-
-电流源驱动电容
-
-* 输入：$$I(t)=Q\delta(t)$$
-* 输出：$$v(t)=\frac{1}{C}\int_{-∞}^{t}I(t)dt=\frac{Q}{C}u(t)$$
-
-![冲激输入电容2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/impulse-input-capacitor-2.png)
 
 ## 参考资料
 

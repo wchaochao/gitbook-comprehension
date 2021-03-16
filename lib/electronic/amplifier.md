@@ -6,13 +6,13 @@
 
 ## MOSFET放大器
 
-### 组成
+符合SCS模型
 
-MOSFET符合SCS模型
+### MOSFET大信号放大器
 
 ![MOSFET放大器](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier.png)
 
-### 传递特性
+#### 传递特性
 
 * $v_o=V_S-i_DR_L$
 * $i_D=\frac{K(v_{IN}-v_T)^2}{2}$
@@ -22,7 +22,7 @@ MOSFET符合SCS模型
 
 ![MOSFET放大器传递特性2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-analysis-2.png)
 
-### 饱和原则
+#### 饱和原则
 
 约束输入使符合饱和原则
 
@@ -34,29 +34,19 @@ MOSFET符合SCS模型
 
 ![MOSFET放大器饱和原则2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-constraint-2.png)
 
-### 偏置
-
-通过偏置电压使小信号位于MOSFET放大器的有效区域
-
-![MOSFET放大器偏置电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-bias-1.png)
-
-![MOSFET放大器偏置分析](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-bias-2.png)
-
-## MOSFET小信号放大器
-
-### 小信号模型
+### MOSFET小信号放大器
 
 ![MOSFET放大器小信号电路模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-small-singal-model.png)
 
-### 增量分析
+#### 增量分析
 
-* 输出电流增量分析：$i_d=K(V_I-V_T)v_i$，增量跨导$g_m=K(V_I-V_T)$
-* 输出电压增量分析：$v_o=-R_Li_d=-R_Lg_mv_i$
+* 增量输出电流：$i_d=K(V_I-V_T)v_i$，增量跨导$g_m=K(V_I-V_T)$
+* 增量输出电压：$v_o=-R_Li_d=-R_Lg_mv_i$
 * 小信号增益：$A=\frac{v_o}{v_i}=-g_mR_L$
 
 ![MOSFET放大器小信号分析](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSFET-amplifier-small-singal.png)
 
-### 增量参数
+#### 增量参数
 
 增量输入电阻：输入电压变化与输入电流变化之比，为无穷大
 
@@ -72,23 +62,17 @@ MOSFET符合SCS模型
 
 增量功率增益：对于给定外部负载，输出功率和输入功率之比，为$[g_m(R_L||R_O)]^2\frac{R_i}{R_o}$
 
-### 工作点
-
-* 输入工作点电压符合饱和原则
-* 输入工作点电压越大小信号增益越大
-* 输出工作点电压符合下一级输入工作点电压
-
 ## BJT放大器
 
-### 组成
-
 约束输入使BJT开关位于放大区域
+
+### BJT大信号放大器
 
 ![BJT放大器](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier.png)
 
 ![BJT放大器等效电路](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-circuit.png)
 
-### 传递特性
+#### 传递特性
 
 * $v_o=V_S-i_CR_L$
 * $i_C=βi_B$
@@ -97,19 +81,17 @@ MOSFET符合SCS模型
 
 ![BJT放大器传递特性](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-analysis.png)
 
-## BJT小信号放大器
-
-### 小信号模型
+### BJT小信号放大器
 
 ![BJT小信号放大器模型](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-amplifier-small-singal-model.png)
 
-### 增量分析
+#### 增量分析
 
-* 输出电流增量分析：$i_c=βi_b$
-* 输出电压增量分析：$v_o=-i_cR_L=-βi_bR_L=-βR_L\frac{v_i}{R_I}$
+* 增量输出电流：$i_c=βi_b$
+* 增量输出电压：$v_o=-i_cR_L=-βi_bR_L=-βR_L\frac{v_i}{R_I}$
 * 小信号增益：$A=\frac{v_o}{v_i}=-β\frac{R_L}{R_I}$
 
-### 增量参数
+#### 增量参数
 
 * 增量输入电阻：${R_I}$
 * 增量输出电阻：${R_L}$
@@ -121,8 +103,6 @@ MOSFET符合SCS模型
 ![BJT增量电流增益](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/BJT-incremental-i-gain.png)
 
 ## 差分放大器
-
-### 组成
 
 ![差分放大器](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/differential-amplifier.png)
 
