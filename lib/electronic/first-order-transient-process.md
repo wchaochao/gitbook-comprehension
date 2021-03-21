@@ -74,6 +74,31 @@
 
 ![串联RL-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL-square.png)
 
+## 状态方程
+
+### 状态变量
+
+可以概括电路在$t_0$时刻以前历史的变量
+
+* 电容中的电荷、电压
+* 电感中的磁通量、电流
+
+### 状态方程分析
+
+RC、RL的一阶微分方程可以写成状态方程$\frac{d}{dt}(状态变量) = f(状态变量，输入变量)$
+
+* 初始状态为$v_c(t_0)$
+* $v_c(t_0 + \bigtriangleup t) = v_c(t_0) + \frac{dv_c}{dt}|_{t=t_0}\bigtriangleup t$
+* $v_c(t_0 + 2\bigtriangleup t) = v_c(t_0 + \bigtriangleup t) + \frac{dv_c}{dt}|_{t=t_0 + \bigtriangleup t}\bigtriangleup t$
+* 即状态变量的值由初始状态和输入变量决定
+
+### 状态方程求解
+
+使用叠加法求解暂态问题，全响应等于零输入响应和零状态响应之和
+
+* 零输入响应：输入变量为0，由初始状态决定的状态变量
+* 零状态响应：初始状态为0，由输入变量决定的状态变量
+
 ## 传播延迟
 
 ### 定义
