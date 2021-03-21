@@ -74,6 +74,42 @@
 
 ![串联RL-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL-square.png)
 
+## 传播延迟
+
+### 定义
+
+* $t_{pd,1\rightarrow 0}$：输入由1变为0时，输出达到相应的有效电压水平的延迟
+* $t_{pd,0\rightarrow 1}$：输入由0变为1时，输出达到相应的有效电压水平的延迟
+* 输入输出端延迟$t_{pd}$：$t_{pd} = max(t_{pd,1\rightarrow 0}, t_{pd,0\rightarrow 1})$
+* 门电路延迟：所有输入到输出的最大延迟
+
+![传播延迟](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/spread-delay.png)
+
+### MOSFET的传播延迟
+
+使用SRC模型分析
+
+* 输入为1并达到稳态时，输出为$V_{TH} = \frac{R_{ON}}{R_{ON} + R_L}V_S$
+* 输入为0并达到稳态时，输出为$V_S$
+* 输入由1变为0时，电容充电，输出由$V_{TH}$变为$V_S$
+* 输入由0变为1时，电容放电，输出由$V_S$变为$V_{TH}$
+
+![MOSFET的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSEFT-spread-delay-1.png)
+
+![MOSFET的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSEFT-spread-delay-2.png)
+
+![MOSFET的传播延迟-3](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSEFT-spread-delay-3.png)
+
+### VLSI的传播延迟
+
+同MOSFET的传播延迟分析
+
+![VLSI的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-1.png)
+
+![VLSI的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-2.png)
+
+![VLSI的传播延迟-3](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-3.png)
+
 ## 参考资料
 
 * 《模拟和数字电子电路基础》
