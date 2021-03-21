@@ -122,6 +122,16 @@ $$v_c = \frac{A}{RC}e^{-\frac{t}{RC}}$$
 
 ![串联RL-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL-square.png)
 
+### 正弦输入
+
+* 特解为$i_{LP} = K_1sin(wt) + K_2cos(wt)$，代入特解式得终值$i_{LP} = V\frac{R}{R^2 + w^2L^2}sin(wt) - V\frac{wl}{R^2 + w^2L^2}cos(wt)$
+* 全解为$i_L = Ae^{-\frac{t}{\tau}} + i_{LP}$，代入初始条件$i_L(0) = 0$，得$A = V\frac{wl}{R^2 + w^2L^2}$
+* t足够大时，指数项衰减完了，全解等于特解
+* 低频时，即$w << \frac{R}{L}$，$i_L \approx \frac{V}{R}sin(wt)$，电感相当于短路，电流有电阻决定
+* 高频时，即$w >> \frac{R}{L}$，$i_L \approx -\frac{V}{wL}cos(wt)$，电流有电感决定，且频率越高，电流越小
+
+![串联RL-正弦输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-RL-sin.png)
+
 ## 状态方程
 
 ### 状态变量
@@ -188,6 +198,16 @@ RC、RL的一阶微分方程可以写成状态方程$\frac{d}{dt}(状态变量) 
 MOSFET漏极与反相器输出间有很长的导线相连，产生寄生电感
 
 ![寄生电感的传播延迟](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/inductance-spread-delay.png)
+
+### 时钟信号的传播延迟
+
+* 时钟信号：0V到电源电压之间的一个方波，提供了全局的时间基准，用于描述系统中什么时候发生了动作
+* 时钟数字抽象：把整块时间分为有效阶段和无效阶段，如只在高电平时观测输入信号，在低电平发生输入信号转变，用于解决输入信号的传播延迟问题
+* 时钟的传播延迟：用唯一的时钟元件给几个模块提供全局的时钟基准时产生的传播延迟
+
+![时钟信号的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-1.png)
+
+![时钟信号的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-2.png)
 
 ## 参考资料
 
