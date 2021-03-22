@@ -37,6 +37,11 @@
 * $t = \tau$时，曲线值为$\frac{A}{e} + V_1$
 * $t = 5\tau$，曲线值接近$V_1$
 
+#### 极限分析
+
+* $R = 0$时，相当于电压直接加载在电容上，电压由$V_0$突变到$V_1$，产生冲激电流
+* $R = \infty$时，相当于断开，电压不变，电流为0，利于保存状态变量
+
 ### 方波输入
 
 电容改变了输入方波的形状
@@ -115,6 +120,11 @@ $$v_c = \frac{A}{RC}e^{-\frac{t}{RC}}$$
 * $t = 0$时，曲线斜率为$-\frac{A}{\tau}$
 * $t = \tau$时，曲线值为$\frac{A}{e} + I_1$
 * $t = 5\tau$，曲线值接近$I_1$
+
+#### 极限分析
+
+* $R = 0$时，相当于电压直接加载在电感上，电流平稳增长，电压为输入电压
+* $R = \infty$时，相当于断路，电流由$V_0$突变为0，产生冲激电压
 
 ### 方波输入
 
@@ -208,6 +218,51 @@ MOSFET漏极与反相器输出间有很长的导线相连，产生寄生电感
 ![时钟信号的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-1.png)
 
 ![时钟信号的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-2.png)
+
+## 数字存储
+
+### 数字存储元件
+
+* Store信号为高时，输入$d_{IN}$被写入到存储器中
+* 存储器中存储的值可以访问，读取到输出$d_{OUT}$
+
+![数字存储元件](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/digital-storage-element.png)
+
+### 动态存储元件
+
+使用电容存储状态变量
+
+* Store信号为高时，开关导通，电容充电至$d_IN$
+* Store信号为低时，开关断开，电容保持原来电压
+
+![动态存储元件-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/dynamic-storage-element-1.png)
+
+使用缓冲器保证静态原则
+
+* 当输入为$V_{IH}$时，输出为$V_{OH}$
+* 当输入为$V_{IL}$时，输出为$V_{OL}$
+
+![动态存储元件-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/dynamic-storage-element-2.png)
+
+缓冲器也会把电容与读存储值的电路隔离起来
+
+![动态存储元件-3](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/dynamic-storage-element-3.png)
+
+由于寄生电阻，电容中的电荷会随着时间流逝
+
+* 电容存储值为0时，放电后仍保持0
+* 电容存储值为1时，放电后可能会低于阈值$V_{IH}$
+
+![动态存储元件-4](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/dynamic-storage-element-4.png)
+
+### 静态存储元件
+
+通过滴流开关来补充泄露的电荷
+
+* 电容存储值为0时，滴流开关断开
+* 电容存储值为1时，滴流开关导通，开关具有非常大的导通电阻，会引入一个小的电流至电容来弥补泄露的电荷
+
+![静态存储元件](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/static-storage-element.png)
 
 ## 参考资料
 
