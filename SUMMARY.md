@@ -19,7 +19,7 @@
 ## JavaScript面向对象编程
 
 * [对象](lib/javascript-oop/object.md)
-* [原型继承](lib/javascript-oop/prototype-inherite.md)
+* [原型](lib/javascript-oop/prototype-inherite.md)
 
 ## JavaScript异步编程
 

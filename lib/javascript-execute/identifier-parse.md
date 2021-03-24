@@ -6,12 +6,12 @@
 
 ## 理解
 
-沿着作用域链查找标志符
+沿着环境记录项链查找标志符
 
-* 在当前作用域查找标志符
+* 在当前环境记录项中查找标志符
  * 可以找到，返回标志符的值
- * 找不到，继续查找外层作用域
-* 所有外层作用域都找不到，报错
+ * 找不到，继续查找外层环境记录项
+* 所有外层环境记录项都找不到，报错
 
 ## Environment Record
 
@@ -28,56 +28,61 @@
  * Value：标志符值
  * Strict：是否是严格模式，用于控制报错
 
-### 标志符绑定
+### 通用内部状态
 
-| Method | Purpose |
-| --- | --- |
-| HasBind(N) | 是否绑定了标志符N |
-| CreateMutableBinding(N, D) | 创建可变绑定，未初始化 |
-| CreateImmutableBinding(N, S) | 创建不可变绑定，未初始化 |
-| InitializeBinding(N, V) | 初始化绑定的标志符 |
-| SetMutableBinding(N, V, S) | 设置可变绑定的值 |
-| GetBindValue(N, S) | 获取绑定标志符的值 |
-| DeleteBinding(N) | 删除绑定 |
-| HasThisBinding() | 是否绑定了this |
-| HasSuperBinding() | 是否绑定了super |
-| WithBaseObject() | 绑定对象 |
+| 内部状态 | 类型 | 描述 |
+| --- | --- | --- |
+| [[OuterEnv]] | Environment Record &#x7c; Null | 外层环境记录项 |
 
-## declarative Environments Record
+### 通用内部操作
 
-声明式环境记录项，继承自Environments Record
+| 内部方法 | 类型 | 描述 |
+| --- | --- | --- |
+| HasBind(N) | (String) -> Boolean | 是否绑定了标志符N |
+| CreateMutableBinding(N, D) | (String, Boolean) -> Boolean | 创建可变绑定，未初始化 |
+| CreateImmutableBinding(N, S) | (String, Boolean) -> Boolean | 创建不可变绑定，未初始化 |
+| InitializeBinding(N, V) | (String, any) -> Boolean | 初始化绑定的标志符 |
+| SetMutableBinding(N, V, S) | (String, any, Boolean) -> Boolean | 设置可变绑定的值 |
+| GetBindValue(N, S) | --- | 获取绑定标志符的值 |
+| DeleteBinding(N) | --- | 删除绑定 |
+| HasThisBinding() | --- | 是否有this绑定 |
+| HasSuperBinding() --- | | 是否有super绑定 |
+| WithBaseObject() --- | | 绑定对象 |
 
-* 由函数、变量声明、cause语句等产生
+## declarative Environment Record
+
+声明式环境记录项
+
+* 执行函数、模块、变量声明、cause语句时产生
 
 ### function Environment Record
 
 函数式环境记录项
 
-* 由函数产生
-* 记录函数中的this、super、参数和顶层标志符
+* 执行函数时产生
+* 提供this、super，记录参数和顶层标志符
 
 ### module Environment Record
 
 模块式环境记录项
 
-* 由模块产生
-* 记录模块中的import值和顶层标志符
+* 执行模块时产生
+* 记录模块的import值和顶层标志符
+* [[OuterEnv]]为global Environment Record
 
 ## object Environment Record
 
-对象式环境记录项，继承自Environments Record
+对象式环境记录项
 
-* 由with语句产生，只绑定可变标志符
-* 有一个绑定对象
- * 标志符绑定操作等价于绑定对象的属性操作
- * 绑定对象可通过Symbol.unscopables排除掉不想被记录的属性
+* 执行with语句时产生，只绑定可变标志符
+* 有一个绑定对象，标志符绑定操作等价于绑定对象的属性操作
 
 ### 特定内部状态
 
 | 内部状态 | 类型 | 描述 |
 | --- | --- | --- |
 | binding object | Object | 绑定对象 |
-| withEnvironment | Boolean | 是否将绑定对象作为this值，默认为false |
+| withEnvironment | Boolean | 是否提供绑定对象，默认为false |
 
 ### 特定内部方法
 
@@ -96,8 +101,9 @@
 
 全局环境记录项
 
-* 由全局代码产生
+* 执行全局代码时产生
 * 有一个全局对象，标志符绑定操作等价于全局对象的属性操作
+* [[OuterEnv]]为null
 
 ## 参考资料
 

@@ -93,8 +93,8 @@ obj.defineProperty('a', {
 | [[GetOwnProperty]] | (propertyKey) -> Property Descriptor &#x7c; Undefined | 获取对象自身属性的属性描述符 |
 | [[DefineOwnProperty]] | (propertyKey, propertyDescriptor) -> Boolean | 创建或设置对象自身属性的属性描述符 |
 | [[HasProperty]] | (propertyKey) -> Boolean | 是否是对象属性（自身属性或继承属性） |
-| [[Get]] | (propertyKey, Receiver) -> any | 获取对象属性的属性值，Receiver为访问器函数的this值，一般为对象本身 |
-| [[Set]] | (propertyKey, value, Receiver) -> Boolean | 设置对象属性的属性值，Receiver为访问器函数的this值，一般为对象本身 |
+| [[Get]] | (propertyKey, Receiver) -> any | 获取对象属性的属性值，Receiver为[[Get]]函数的this值，一般为对象本身 |
+| [[Set]] | (propertyKey, value, Receiver) -> Boolean | 设置对象属性的属性值，Receiver为[[Set]]访问器函数的this值，一般为对象本身 |
 | [[Delete]] | () -> Boolean | 删除对象自身属性 |
 | [[OwnPropertyKeys]] | () -> List of propertyKey | 获取对象自身属性的属性列表 |
 
@@ -192,7 +192,7 @@ obj.defineProperty('a', {
 
 ## 常用操作
 
-### Get(V, P)
+### GetV(V, P)
 
 获取属性
 

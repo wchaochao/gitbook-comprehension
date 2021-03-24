@@ -10,10 +10,6 @@
 * ES6语法
 * ES6 API
 
-## JavaScript执行
-
-* 标志符解析
-
 ## JavaScript函数式编程
 
 * 函数
@@ -21,7 +17,7 @@
 ## JavaScript面向对象编程
 
 * 对象
-* 原型继承
+* 原型
 
 ## JavaScript异步编程
 
@@ -29,6 +25,10 @@
 * Promise
 * Generator
 * Async/Await
+
+## JavaScript执行
+
+* 标志符解析
 
 ## 浏览器系列
 
