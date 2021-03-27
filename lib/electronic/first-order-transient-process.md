@@ -42,6 +42,11 @@
 * $R = 0$时，相当于电压直接加载在电容上，电压由$V_0$突变到$V_1$，产生冲激电流
 * $R = \infty$时，相当于断开，电压不变，电流为0，利于保存状态变量
 
+#### 物理意义
+
+* 直流稳态时，电容相当于断路
+* 输入突然变化时，电容相当于电压源
+
 ### 方波输入
 
 电容改变了输入方波的形状
@@ -52,9 +57,13 @@
 
 ![串联RC-方波输入](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-rc-square.png)
 
+### 脉冲输入
+
+$$v_c = \begin{cases} V_p(1 - e^{-\frac{t}{RC}}) & 0 \leq t \leq t_p \\ [V_p(1 - e^{-\frac{t_p}{RC}}]e^{-\frac{t - t_p}{RC}} & t \geqslant t_p \end{cases}$$
+
 #### 长脉冲
 
-完成了完整的充放电
+$t_p >> RC$，完成了完整的充放电
 
 $$v_c = \begin{cases} V_p(1 - e^{-\frac{t}{RC}}) & 0 \leq t \leq t_p \\ V_pe^{-\frac{t - t_p}{RC}} & t \geqslant t_p \end{cases}$$
 
@@ -62,17 +71,16 @@ $$v_c = \begin{cases} V_p(1 - e^{-\frac{t}{RC}}) & 0 \leq t \leq t_p \\ V_pe^{-\
 
 #### 窄脉冲
 
-未能完成完整的充放电
+$t_p << RC$时，未能完成完整的充放电
 
-$$v_c = \begin{cases} V_p(1 - e^{-\frac{t}{RC}}) & 0 \leq t \leq t_p \\ [V_p(1 - e^{-\frac{t_p}{RC}}]e^{-\frac{t - t_p}{RC}} & t \geqslant t_p \end{cases}$$
+$$v_c = \begin{cases} \frac{V_p}{RC}t & 0 \leq t \leq t_p \\ \frac{V_pt_p}{RC}e^{-\frac{t - t_p}{RC}} \approx \frac{V_pt_p}{RC}(1 - \frac{t - t_p}{RC}) & t \geqslant t_p \end{cases}$$
 
-当$t_p << RC$时，进行指数展开得
-
-$$v_c = \begin{cases} \frac{V_p}{RC}t & 0 \leq t \leq t_p \\ \frac{V_pt_p}{RC}e^{-\frac{t - t_p}{RC}} & t \geqslant t_p \end{cases}$$
+* $v_c((2n + 1)t_p) = v_c(2nt_p)(1 - \frac{t_p}{\tau}) + V_p\frac{t_p}{\tau}$
+* $v_c(2nt_p) = v_c((2n - 1)t_p)(1 - \frac{t_p}{\tau})$
 
 ![串联RC-窄脉冲](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/series-rc-narrow-pulse.png)
 
-### 冲击输入
+### 冲激输入
 
 极限的窄脉冲
 
@@ -126,6 +134,11 @@ $$v_c = \frac{A}{RC}e^{-\frac{t}{RC}}$$
 * $R = 0$时，相当于电压直接加载在电感上，电流平稳增长，电压为输入电压
 * $R = \infty$时，相当于断路，电流由$V_0$突变为0，产生冲激电压
 
+#### 物理意义
+
+* 直流稳态时，电感相当于短路
+* 输入突然变化时，电感相当于电流源
+
 ### 方波输入
 
 电感改变了输入方波的形状
@@ -162,17 +175,19 @@ RC、RL的一阶微分方程可以写成状态方程$\frac{d}{dt}(状态变量) 
 
 ### 状态方程求解
 
-使用叠加法求解暂态问题，全响应等于零输入响应和零状态响应之和
+全响应等于零输入响应和零状态响应之和
 
-* 零输入响应：输入变量为0，由初始状态决定的状态变量
-* 零状态响应：初始状态为0，由输入变量决定的状态变量
+* 零输入响应：没有驱动的情况下，系统对初始储能的响应
+* 零状态响应：没有初始储能的情况下，系统对驱动信号的响应
+ * 驱动信号的积分信号的零状态响应等于驱动信号零状态响应的积分
+ * 驱动信号的微分信号的零状态响应等于微分信号零状态响应的微分
 
 ## 传播延迟
 
 ### 定义
 
-* $t_{pd,1\rightarrow 0}$：输入由1变为0时，输出达到相应的有效电压水平的延迟
-* $t_{pd,0\rightarrow 1}$：输入由0变为1时，输出达到相应的有效电压水平的延迟
+* $t_{pd,1\rightarrow 0}$：输入由1变为0时，输出达到相应的有效电平的延迟
+* $t_{pd,0\rightarrow 1}$：输入由0变为1时，输出达到相应的有效电平的延迟
 * 输入输出端延迟$t_{pd}$：$t_{pd} = max(t_{pd,1\rightarrow 0}, t_{pd,0\rightarrow 1})$
 * 门电路延迟：所有输入到输出的最大延迟
 
@@ -184,8 +199,8 @@ RC、RL的一阶微分方程可以写成状态方程$\frac{d}{dt}(状态变量) 
 
 * 输入为1并达到稳态时，输出为$V_{TH} = \frac{R_{ON}}{R_{ON} + R_L}V_S$
 * 输入为0并达到稳态时，输出为$V_S$
-* 输入由1变为0时，电容充电，输出由$V_{TH}$变为$V_S$
-* 输入由0变为1时，电容放电，输出由$V_S$变为$V_{TH}$
+* 输入由1变为0时，输出由$V_{TH}$变为$V_S$，$\tau = R_LC_G$，上升时间$t_{rise} = -\tau ln(\frac{V_S - V_{IH}}{V_S - V_{TH}})$
+* 输入由0变为1时，输出由$V_S$变为$V_{TH}$，$\tau = (R_L || R_{ON})C_G$，下降时间$t_{fall} = -\tau ln(\frac{V_{IL} - V_{TH}}{V_S - V_{TH}})$
 
 ![MOSFET的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/MOSEFT-spread-delay-1.png)
 
@@ -195,19 +210,18 @@ RC、RL的一阶微分方程可以写成状态方程$\frac{d}{dt}(状态变量) 
 
 ### VLSI的传播延迟
 
-同MOSFET的传播延迟分析
+长导线使用寄生电阻和寄生电容模拟
+
+* 输入为1并达到稳态时，输出为$V_{TH} = \frac{R_{ON}}{R_{ON} + R_L}V_S$
+* 输入为0并达到稳态时，输出为$V_S$
+* 输入由1变为0时，输出由$V_{TH}$变为$V_S$，$\tau = (R_L + R_{wire})(C_G + C_{wire})$
+* 输入由0变为1时，输出由$V_S$变为$V_{TH}$，$\tau = (R_L || R_{ON} + R_{wire})(C_G + C_{wire})$
 
 ![VLSI的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-1.png)
 
 ![VLSI的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-2.png)
 
 ![VLSI的传播延迟-3](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/VLSI-spread-delay-3.png)
-
-### 寄生电感的传播延迟
-
-MOSFET漏极与反相器输出间有很长的导线相连，产生寄生电感
-
-![寄生电感的传播延迟](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/inductance-spread-delay.png)
 
 ### 时钟信号的传播延迟
 
@@ -218,6 +232,12 @@ MOSFET漏极与反相器输出间有很长的导线相连，产生寄生电感
 ![时钟信号的传播延迟-1](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-1.png)
 
 ![时钟信号的传播延迟-2](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/clock-spread-delay-2.png)
+
+### 寄生电感的传播延迟
+
+MOSFET漏极与反相器输出间有很长的导线相连，产生寄生电感
+
+![寄生电感的传播延迟](https://raw.githubusercontent.com/wchaochao/images/master/gitbook-circuit/inductance-spread-delay.png)
 
 ## 数字存储
 

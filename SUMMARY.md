@@ -10,7 +10,7 @@
 
 ## JavaScript执行
 
-* [标志符解析](lib/javascript-execute/identifier-parse.md)
+* [环境记录项](lib/javascript-execute/environment-record.md)
 
 ## JavaScript函数式编程
 
